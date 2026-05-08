@@ -1,29 +1,29 @@
 # AWS Secrets Manager
 
-## O que é?
+## What is it?
 
-AWS Secrets Manager é um serviço que ajuda a proteger o acesso a aplicações, serviços e recursos de TI. Permite armazenar, rotacionar, gerenciar e recuperar credenciais de banco de dados, chaves de API e outros segredos de forma segura — eliminando segredos hardcoded no código-fonte.
+AWS Secrets Manager is a service that helps protect access to applications, services, and IT resources. It allows you to securely store, rotate, manage, and retrieve database credentials, API keys, and other secrets — eliminating hardcoded secrets in source code.
 
-## Casos de uso
+## Use cases
 
-- Armazenar credenciais de banco de dados (usuário/senha do RDS, Aurora, etc.)
-- Gerenciar chaves de API de serviços externos (Stripe, Twilio, SendGrid)
-- Rotacionar senhas automaticamente sem alterar o código da aplicação
-- Centralizar o gerenciamento de segredos em ambientes multi-conta
-- Cumprir políticas de segurança que proíbem credenciais em código ou arquivos de configuração
+- Store database credentials (username/password for RDS, Aurora, etc.)
+- Manage API keys for external services (Stripe, Twilio, SendGrid)
+- Rotate passwords automatically without changing application code
+- Centralize secret management in multi-account environments
+- Meet security policies that prohibit credentials in code or configuration files
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Rotação automática**: o Secrets Manager pode rotacionar segredos automaticamente em intervalos definidos — sem downtime na aplicação
-- **Integração nativa com RDS, Aurora, Redshift, DocumentDB**: rotação automática de senhas de banco de dados configurável em poucos cliques
-- **Criptografia**: todos os segredos são criptografados com KMS
-- **Versionamento**: mantém versões anteriores do segredo para rollback
+- **Automatic rotation**: Secrets Manager can automatically rotate secrets on defined intervals — with no application downtime
+- **Native integration with RDS, Aurora, Redshift, DocumentDB**: automatic database password rotation configurable in a few clicks
+- **Encryption**: all secrets are encrypted with KMS
+- **Versioning**: keeps previous versions of the secret for rollback
 - **Secrets Manager vs SSM Parameter Store:**
-  - Secrets Manager: focado em segredos, rotação automática, custo por segredo (~$0.40/mês)
-  - SSM Parameter Store: mais genérico (configs + segredos), mais barato, sem rotação automática nativa para bancos
-- **SDK integration**: aplicações chamam o Secrets Manager via SDK em vez de ler arquivos de configuração
-- **Auditoria**: todas as chamadas são registradas no CloudTrail
+  - Secrets Manager: focused on secrets, automatic rotation, cost per secret (~$0.40/month)
+  - SSM Parameter Store: more general (configs + secrets), cheaper, no native automatic rotation for databases
+- **SDK integration**: applications call Secrets Manager via SDK instead of reading configuration files
+- **Auditing**: all calls are logged in CloudTrail
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma aplicação Java conecta ao RDS PostgreSQL usando usuário e senha. Em vez de colocar as credenciais no `application.properties` (risco enorme se o repositório for exposto), o time usa o Secrets Manager: a senha fica armazenada no Secrets Manager, e a aplicação busca as credenciais via SDK em tempo de execução. O Secrets Manager rotaciona a senha automaticamente a cada 30 dias, atualizando também o RDS — a aplicação sempre recebe credenciais válidas sem nenhuma intervenção humana.
+**Scenario:** A Java application connects to an RDS PostgreSQL database using a username and password. Instead of placing credentials in `application.properties` (a huge risk if the repository is exposed), the team uses Secrets Manager: the password is stored in Secrets Manager, and the application retrieves credentials via SDK at runtime. Secrets Manager automatically rotates the password every 30 days, also updating RDS — the application always receives valid credentials without any human intervention.

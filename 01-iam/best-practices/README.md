@@ -1,29 +1,29 @@
-# IAM Best Practices (Boas Práticas)
+# IAM Best Practices
 
-## O que é?
+## What is it?
 
-Boas práticas de IAM são um conjunto de recomendações da AWS para configurar e gerenciar identidades e acessos de forma segura. Seguir essas práticas reduz drasticamente o risco de brechas de segurança e acessos não autorizados.
+IAM best practices are a set of AWS recommendations for configuring and managing identities and access securely. Following these practices dramatically reduces the risk of security breaches and unauthorized access.
 
-## Casos de uso
+## Use cases
 
-- Proteger a conta AWS de acessos indevidos
-- Atender a requisitos de conformidade (ISO 27001, SOC 2, PCI DSS)
-- Implementar o modelo de segurança de **Confiança Zero (Zero Trust)**
-- Auditar e revisar periodicamente permissões e acessos
+- Protect the AWS account from unauthorized access
+- Meet compliance requirements (ISO 27001, SOC 2, PCI DSS)
+- Implement the **Zero Trust** security model
+- Periodically audit and review permissions and access
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-1. **Não use a conta root** para tarefas do dia a dia — proteja-a com MFA e guarde as credenciais em local seguro
-2. **Crie usuários IAM individuais** — nunca compartilhe credenciais entre pessoas
-3. **Use grupos para atribuir permissões** — é mais fácil gerenciar permissões em grupos do que individualmente
-4. **Princípio do Menor Privilégio** — conceda apenas as permissões mínimas necessárias para a tarefa
-5. **Habilite MFA** — especialmente para a conta root e usuários com privilégios elevados
-6. **Use roles para aplicações** em vez de chaves de acesso embutidas no código
-7. **Rotacione credenciais regularmente** — chaves de acesso devem ser rotacionadas periodicamente
-8. **Use IAM Access Analyzer** para identificar recursos expostos externamente
-9. **Remova credenciais não utilizadas** — usuários e chaves sem uso são riscos de segurança
-10. **Use AWS Organizations + SCPs** para controle centralizado em ambientes multi-conta
+1. **Do not use the root account** for daily tasks — protect it with MFA and store credentials in a safe place
+2. **Create individual IAM users** — never share credentials between people
+3. **Use groups to assign permissions** — it is easier to manage permissions in groups than individually
+4. **Principle of Least Privilege** — grant only the minimum permissions necessary for the task
+5. **Enable MFA** — especially for the root account and users with elevated privileges
+6. **Use roles for applications** instead of hardcoded access keys in code
+7. **Rotate credentials regularly** — access keys should be rotated periodically
+8. **Use IAM Access Analyzer** to identify externally exposed resources
+9. **Remove unused credentials** — unused users and keys are security risks
+10. **Use AWS Organizations + SCPs** for centralized control in multi-account environments
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma startup começa com o owner usando a conta root para tudo. Após uma auditoria de segurança, o time adota as boas práticas: cria um usuário IAM administrador para operações diárias, habilita MFA na conta root e no admin, organiza os devs em grupos (`Developers`, `QA`, `Ops`) com políticas específicas para cada um, e configura o IAM Access Analyzer para receber alertas caso algum bucket S3 seja acidentalmente exposto ao público. As chaves de acesso são rotacionadas a cada 90 dias via política interna.
+**Scenario:** A startup begins with the owner using the root account for everything. After a security audit, the team adopts best practices: creates an IAM admin user for daily operations, enables MFA on the root and admin accounts, organizes developers into groups (`Developers`, `QA`, `Ops`) with specific policies for each, and configures IAM Access Analyzer to receive alerts if any S3 bucket is accidentally made public. Access keys are rotated every 90 days through internal policy.

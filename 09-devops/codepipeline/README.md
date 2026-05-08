@@ -1,28 +1,28 @@
 # AWS CodePipeline
 
-## O que é?
+## What is it?
 
-AWS CodePipeline é um serviço de entrega contínua (CD — Continuous Delivery) totalmente gerenciado que automatiza os pipelines de release para atualizações de aplicações rápidas e confiáveis. Orquestra as etapas de build, teste e deploy sempre que ocorre uma mudança no código-fonte.
+AWS CodePipeline is a fully managed continuous delivery (CD) service that automates release pipelines for fast and reliable application updates. It orchestrates the build, test, and deploy steps whenever a change occurs in the source code.
 
-## Casos de uso
+## Use cases
 
-- Automatizar o fluxo de build → teste → deploy de aplicações
-- Implementar CI/CD para aplicações em EC2, ECS, Lambda ou on-premises
-- Orquestrar múltiplas ferramentas de desenvolvimento (CodeCommit, GitHub, CodeBuild, CodeDeploy)
-- Implementar gates de aprovação manual antes do deploy em produção
-- Padronizar o processo de entrega de software em toda a organização
+- Automate the build → test → deploy flow for applications
+- Implement CI/CD for applications on EC2, ECS, Lambda, or on-premises
+- Orchestrate multiple development tools (CodeCommit, GitHub, CodeBuild, CodeDeploy)
+- Implement manual approval gates before deploying to production
+- Standardize the software delivery process across the organization
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Pipeline**: sequência de estágios (stages) que o código percorre do commit ao deploy
-- **Stages (Estágios)**: etapas do pipeline — tipicamente Source → Build → Test → Deploy
-- **Actions**: ações dentro de cada estágio (ex: checar código do GitHub, executar CodeBuild, fazer deploy com CodeDeploy)
-- **Integração**: funciona com CodeCommit, GitHub, Bitbucket (Source); CodeBuild (Build); CodeDeploy, ECS, Lambda, CloudFormation (Deploy)
-- **Notificações**: integra com SNS e CloudWatch Events para alertas sobre falhas e aprovações
-- **Aprovação manual**: adicione um estágio de aprovação para exigir revisão humana antes do deploy em produção
-- **Parallel actions**: ações dentro de um mesmo estágio podem executar em paralelo
-- **Totalmente gerenciado e serverless**: sem servidores para gerenciar, pague por pipeline ativo/mês
+- **Pipeline**: sequence of stages that code goes through from commit to deploy
+- **Stages**: steps of the pipeline — typically Source → Build → Test → Deploy
+- **Actions**: actions within each stage (e.g., check code from GitHub, run CodeBuild, deploy with CodeDeploy)
+- **Integration**: works with CodeCommit, GitHub, Bitbucket (Source); CodeBuild (Build); CodeDeploy, ECS, Lambda, CloudFormation (Deploy)
+- **Notifications**: integrates with SNS and CloudWatch Events for alerts on failures and approvals
+- **Manual approval**: add an approval stage to require human review before deploying to production
+- **Parallel actions**: actions within the same stage can execute in parallel
+- **Fully managed and serverless**: no servers to manage; pay per active pipeline per month
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um time de devs usa GitHub para versionamento. O CodePipeline monitora o branch `main`: quando um PR é mergeado, o pipeline dispara automaticamente — (1) Source: clona o código do GitHub; (2) Build: CodeBuild executa os testes unitários e gera o artefato; (3) Deploy-Staging: CodeDeploy faz deploy no ambiente de homologação; (4) Aprovação manual: o tech lead aprova o deploy; (5) Deploy-Prod: CodeDeploy faz deploy em produção com rolling update. Todo o processo é auditado e repetível.
+**Scenario:** A dev team uses GitHub for version control. CodePipeline monitors the `main` branch: when a PR is merged, the pipeline triggers automatically — (1) Source: clones the code from GitHub; (2) Build: CodeBuild runs unit tests and produces the artifact; (3) Deploy-Staging: CodeDeploy deploys to the staging environment; (4) Manual approval: the tech lead approves the deploy; (5) Deploy-Prod: CodeDeploy deploys to production with a rolling update. The entire process is audited and repeatable.

@@ -1,42 +1,42 @@
-# Alta Disponibilidade (High Availability)
+# High Availability
 
-## O que é?
+## What is it?
 
-Alta Disponibilidade (HA) é a capacidade de um sistema de permanecer operacional e acessível por um longo período, mesmo diante de falhas de componentes individuais. Na AWS, HA é alcançada através da distribuição de recursos em múltiplas Zonas de Disponibilidade (AZs) e regiões, com failover automático.
+High Availability (HA) is the ability of a system to remain operational and accessible for a long period, even in the face of individual component failures. On AWS, HA is achieved by distributing resources across multiple Availability Zones (AZs) and regions, with automatic failover.
 
-## Casos de uso
+## Use cases
 
-- Aplicações críticas de negócio que não podem ter downtime (banking, e-commerce, saúde)
-- Sistemas que precisam de SLA de 99,99% ou superior
-- Proteção contra falhas de datacenter e manutenções planejadas
-- Recuperação automática de desastres (Disaster Recovery)
-- Ambientes de produção com milhões de usuários
+- Business-critical applications that cannot have downtime (banking, e-commerce, healthcare)
+- Systems that require 99.99% SLA or higher
+- Protection against datacenter failures and planned maintenance
+- Automatic disaster recovery
+- Production environments with millions of users
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-**Conceitos fundamentais:**
+**Fundamental concepts:**
 
-- **Alta Disponibilidade vs Tolerância a Falhas:**
-  - HA = o sistema continua operacional após uma falha (pode haver breve interrupção)
-  - Fault Tolerance = o sistema opera SEM NENHUMA interrupção mesmo durante falhas (mais caro e complexo)
+- **High Availability vs Fault Tolerance:**
+  - HA = the system remains operational after a failure (there may be a brief interruption)
+  - Fault Tolerance = the system operates with NO interruption even during failures (more expensive and complex)
 
-- **Região vs Zona de Disponibilidade:**
-  - Região: área geográfica com múltiplos datacenters (ex: sa-east-1 = São Paulo)
-  - AZ (Zona de Disponibilidade): datacenter(s) isolados dentro de uma região — conectados por fibra de baixa latência
+- **Region vs Availability Zone:**
+  - Region: geographic area with multiple datacenters (e.g., us-east-1 = N. Virginia)
+  - AZ (Availability Zone): isolated datacenter(s) within a region — connected by low-latency fiber
 
-**Padrões de HA na AWS:**
+**HA patterns on AWS:**
 
-1. **Multi-AZ**: distribuir recursos (EC2, RDS, ElastiCache) em 2+ AZs com failover automático
-2. **Auto Scaling**: substituir automaticamente instâncias com falha por novas instâncias saudáveis
-3. **Elastic Load Balancer**: distribuir tráfego entre instâncias saudáveis em múltiplas AZs
-4. **RDS Multi-AZ**: réplica síncrona em standby — failover automático em menos de 2 minutos
-5. **Route 53 Health Checks + Failover**: redirecionar tráfego para região de backup se a principal falhar
+1. **Multi-AZ**: distribute resources (EC2, RDS, ElastiCache) across 2+ AZs with automatic failover
+2. **Auto Scaling**: automatically replace failed instances with new healthy ones
+3. **Elastic Load Balancer**: distribute traffic across healthy instances in multiple AZs
+4. **RDS Multi-AZ**: synchronous standby replica — automatic failover in under 2 minutes
+5. **Route 53 Health Checks + Failover**: redirect traffic to a backup region if the primary fails
 
-**SLAs de disponibilidade:**
-- 99,9% = 8,7 horas de downtime/ano
-- 99,99% = 52 minutos de downtime/ano
-- 99,999% = 5 minutos de downtime/ano (five nines)
+**Availability SLAs:**
+- 99.9% = 8.7 hours of downtime/year
+- 99.99% = 52 minutes of downtime/year
+- 99.999% = 5 minutes of downtime/year (five nines)
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um banco projeta sua aplicação web para 99,99% de disponibilidade. A arquitetura usa: ALB distribuindo tráfego entre EC2 em 2 AZs (us-east-1a e us-east-1b) com Auto Scaling Group mínimo de 2 instâncias; RDS Aurora com Multi-AZ e failover automático; ElastiCache Redis em cluster multi-AZ; Route 53 com health checks e failover para uma região secundária (us-west-2). Quando a AZ us-east-1a vai abaixo para manutenção, o tráfego é automaticamente redirecionado para us-east-1b — sem nenhum usuário perceber.
+**Scenario:** A bank designs its web application for 99.99% availability. The architecture uses: an ALB distributing traffic across EC2 instances in 2 AZs (us-east-1a and us-east-1b) with an Auto Scaling Group minimum of 2 instances; Aurora RDS with Multi-AZ and automatic failover; ElastiCache Redis in a multi-AZ cluster; Route 53 with health checks and failover to a secondary region (us-west-2). When AZ us-east-1a goes down for maintenance, traffic is automatically redirected to us-east-1b — without any user noticing.

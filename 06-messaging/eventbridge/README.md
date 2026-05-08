@@ -1,28 +1,28 @@
 # Amazon EventBridge
 
-## O que é?
+## What is it?
 
-Amazon EventBridge é um barramento de eventos serverless que facilita a construção de aplicações orientadas a eventos. Conecta diferentes aplicações usando eventos — recebe eventos de fontes AWS, parceiros SaaS ou aplicações customizadas e os roteita para targets como Lambda, SQS, SNS, Step Functions e muito mais.
+Amazon EventBridge is a serverless event bus that makes it easy to build event-driven applications. It connects different applications using events — receiving events from AWS sources, SaaS partners, or custom applications and routing them to targets such as Lambda, SQS, SNS, Step Functions, and more.
 
-## Casos de uso
+## Use cases
 
-- Orquestração de microsserviços baseada em eventos
-- Automação de operações (ex: snapshots automáticos quando um EC2 é iniciado)
-- Agendamento de tarefas (substituto moderno do CloudWatch Events para cron)
-- Integração com aplicações SaaS (Datadog, Zendesk, Shopify) sem código intermediário
-- Auditoria e roteamento de eventos de segurança (GuardDuty, Security Hub)
+- Event-driven microservice orchestration
+- Operations automation (e.g., automatic snapshots when an EC2 is started)
+- Task scheduling (modern replacement of CloudWatch Events for cron jobs)
+- Integration with SaaS applications (Datadog, Zendesk, Shopify) without intermediate code
+- Routing and auditing security events (GuardDuty, Security Hub)
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Event Bus**: canal onde os eventos fluem — há um bus padrão (AWS events), buses de parceiros e buses customizados
-- **Rules (Regras)**: filtram eventos com base em padrões e os roteiam para targets — você define "se o evento for X, envie para Y"
-- **Targets**: onde o evento é enviado — Lambda, SQS, SNS, Step Functions, EC2, Kinesis, API Gateway, etc. (até 5 targets por regra)
-- **Schema Registry**: catálogo de esquemas de eventos — facilita o desenvolvimento com autocompletar e validação
-- **EventBridge Scheduler**: agenda tarefas em horários específicos ou em intervalos (ex: executar Lambda todo dia às 8h)
-- **Diferença do SNS**: EventBridge tem roteamento baseado em conteúdo do evento e integra com 200+ fontes SaaS; SNS é mais simples e para notificações
-- **Substituto do CloudWatch Events**: o CloudWatch Events foi renomeado para EventBridge — mesma funcionalidade, mais recursos
-- **Serverless e gerenciado**: sem infraestrutura para gerenciar, escala automaticamente
+- **Event Bus**: channel where events flow — there is a default bus (AWS events), partner buses, and custom buses
+- **Rules**: filter events based on patterns and route them to targets — you define "if the event is X, send to Y"
+- **Targets**: where the event is sent — Lambda, SQS, SNS, Step Functions, EC2, Kinesis, API Gateway, etc. (up to 5 targets per rule)
+- **Schema Registry**: catalog of event schemas — facilitates development with autocomplete and validation
+- **EventBridge Scheduler**: schedules tasks at specific times or intervals (e.g., run Lambda every day at 8am)
+- **Difference from SNS**: EventBridge has content-based routing and integrates with 200+ SaaS sources; SNS is simpler and focused on notifications
+- **Successor to CloudWatch Events**: CloudWatch Events was renamed to EventBridge — same functionality, more features
+- **Serverless and managed**: no infrastructure to manage, scales automatically
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma empresa quer automatizar ações de segurança. Quando o AWS GuardDuty detecta uma atividade suspeita, ele publica um evento no EventBridge. Uma regra filtra eventos com severidade alta e os envia simultaneamente para: (1) uma função Lambda que bloqueia automaticamente o IP suspeito no WAF, (2) uma fila SQS que notifica o time de segurança, (3) um registro no S3 para auditoria. Tudo automatizado sem intervenção humana.
+**Scenario:** A company wants to automate security actions. When AWS GuardDuty detects suspicious activity, it publishes an event to EventBridge. A rule filters events with high severity and routes them simultaneously to: (1) a Lambda function that automatically blocks the suspicious IP in WAF, (2) an SQS queue that notifies the security team, (3) an S3 record for audit purposes. Everything is automated without human intervention.

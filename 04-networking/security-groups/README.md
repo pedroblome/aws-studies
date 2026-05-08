@@ -1,28 +1,28 @@
-# Security Groups (Grupos de Segurança)
+# Security Groups
 
-## O que é?
+## What is it?
 
-Security Groups são firewalls virtuais que controlam o tráfego de entrada (inbound) e saída (outbound) de recursos AWS como instâncias EC2, RDS, e outros. Funcionam no nível do recurso (instância) e são stateful — se uma requisição de entrada é permitida, a resposta de saída é automaticamente permitida.
+Security Groups are virtual firewalls that control inbound and outbound traffic for AWS resources such as EC2 instances, RDS, and others. They operate at the resource (instance) level and are stateful — if an inbound request is allowed, the outbound response is automatically allowed.
 
-## Casos de uso
+## Use cases
 
-- Controlar quais endereços IP podem acessar um servidor web (porta 80/443)
-- Restringir acesso SSH (porta 22) apenas para IPs do escritório
-- Permitir que apenas o servidor de aplicação se comunique com o banco de dados (porta 3306)
-- Criar regras baseadas em outros Security Groups (ex: "aceite apenas tráfego do Load Balancer")
-- Isolar camadas de uma aplicação multi-tier
+- Control which IP addresses can access a web server (port 80/443)
+- Restrict SSH access (port 22) to only the office's IP addresses
+- Allow only the application server to communicate with the database (port 3306)
+- Create rules based on other Security Groups (e.g., "accept traffic only from the Load Balancer")
+- Isolate layers of a multi-tier application
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Stateful**: se o tráfego de entrada é permitido, o retorno é automaticamente permitido (sem precisar de regra de saída explícita)
-- **Apenas regras de ALLOW** — não há como criar regras de DENY em Security Groups (use Network ACL para bloqueios)
-- Por padrão: **todo tráfego de entrada é bloqueado** e **todo tráfego de saída é permitido**
-- Podem ser anexados a **múltiplas instâncias** — e uma instância pode ter **múltiplos Security Groups**
-- Regras podem referenciar **outros Security Groups** (não apenas IPs) — muito poderoso para arquiteturas em camadas
-- Operam no nível da **instância/recurso** — diferente do Network ACL que opera no nível da sub-rede
-- Mudanças nas regras são aplicadas **imediatamente** a todas as instâncias associadas
-- **Security Group vs Network ACL**: SG = stateful, apenas Allow, nível da instância; NACL = stateless, Allow e Deny, nível da sub-rede
+- **Stateful**: if inbound traffic is allowed, the return traffic is automatically allowed (no explicit outbound rule needed)
+- **Allow rules only** — you cannot create DENY rules in Security Groups (use Network ACL for blocking)
+- By default: **all inbound traffic is blocked** and **all outbound traffic is allowed**
+- Can be attached to **multiple instances** — and one instance can have **multiple Security Groups**
+- Rules can reference **other Security Groups** (not just IPs) — very powerful for layered architectures
+- Operate at the **instance/resource level** — unlike Network ACL, which operates at the subnet level
+- Rule changes are applied **immediately** to all associated instances
+- **Security Group vs Network ACL**: SG = stateful, Allow only, instance level; NACL = stateless, Allow and Deny, subnet level
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma arquitetura web 3-tier define: SG-Web (aceita HTTP/HTTPS de qualquer IP, SSH apenas do IP do escritório); SG-App (aceita tráfego na porta 8080 apenas do SG-Web); SG-DB (aceita conexões MySQL na porta 3306 apenas do SG-App). Dessa forma, o banco de dados é completamente inacessível pela internet, mesmo que alguém tente acessá-lo diretamente — o tráfego só chega ao banco se vier do servidor de aplicação.
+**Scenario:** A 3-tier web architecture defines: SG-Web (accepts HTTP/HTTPS from any IP, SSH only from the office IP); SG-App (accepts traffic on port 8080 only from SG-Web); SG-DB (accepts MySQL connections on port 3306 only from SG-App). This way, the database is completely unreachable from the internet, even if someone tries to access it directly — traffic only reaches the database if it comes from the application server.

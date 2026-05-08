@@ -1,31 +1,31 @@
 # Amazon EC2 (Elastic Compute Cloud)
 
-## O que é?
+## What is it?
 
-Amazon EC2 é o serviço de computação virtual da AWS que fornece servidores (instâncias) na nuvem. Você escolhe o tipo de instância (CPU, memória, armazenamento), o sistema operacional e paga apenas pelo tempo de uso. É a base da infraestrutura de computação da AWS.
+Amazon EC2 is AWS's virtual computing service that provides servers (instances) in the cloud. You choose the instance type (CPU, memory, storage), the operating system, and pay only for the time you use it. It is the foundation of AWS compute infrastructure.
 
-## Casos de uso
+## Use cases
 
-- Hospedar aplicações web e APIs backend
-- Executar servidores de banco de dados
-- Processar grandes volumes de dados (big data, machine learning)
-- Ambiente de desenvolvimento e testes
-- Hospedar aplicações legadas que requerem controle total do servidor
+- Host web applications and backend APIs
+- Run database servers
+- Process large volumes of data (big data, machine learning)
+- Development and testing environments
+- Host legacy applications that require full server control
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Modelos de precificação:**
-  - **On-Demand**: pague pelo que usar, sem compromisso — ideal para cargas imprevisíveis
-  - **Reserved Instances**: desconto de até 72% com compromisso de 1 ou 3 anos
-  - **Spot Instances**: até 90% mais barato, mas a AWS pode interromper — ideal para cargas tolerantes a falhas
-  - **Savings Plans**: desconto similar ao Reserved, com mais flexibilidade de uso
-  - **Dedicated Hosts**: servidor físico dedicado — para conformidade ou licenças de software
-- **Tipos de instância:** General Purpose (T, M), Compute Optimized (C), Memory Optimized (R, X), Storage Optimized (I, D)
-- **EC2 é um serviço IaaS** (Infrastructure as a Service) — você gerencia o SO e acima
-- **Auto Scaling** escala automaticamente a quantidade de instâncias conforme a demanda
-- **Elastic Load Balancer (ELB)** distribui o tráfego entre múltiplas instâncias
-- **Security Groups** funcionam como firewall virtual no nível da instância
+- **Pricing models:**
+  - **On-Demand**: pay for what you use, no commitment — ideal for unpredictable workloads
+  - **Reserved Instances**: up to 72% discount with a 1 or 3-year commitment
+  - **Spot Instances**: up to 90% cheaper, but AWS can interrupt them — ideal for fault-tolerant workloads
+  - **Savings Plans**: similar discount to Reserved, with more usage flexibility
+  - **Dedicated Hosts**: dedicated physical server — for compliance or software licensing requirements
+- **Instance types:** General Purpose (T, M), Compute Optimized (C), Memory Optimized (R, X), Storage Optimized (I, D)
+- **EC2 is an IaaS service** (Infrastructure as a Service) — you manage the OS and above
+- **Auto Scaling** automatically scales the number of instances based on demand
+- **Elastic Load Balancer (ELB)** distributes traffic across multiple instances
+- **Security Groups** act as a virtual firewall at the instance level
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma loja virtual tem picos de tráfego durante a Black Friday. O arquiteto configura um Auto Scaling Group com instâncias EC2 do tipo `t3.medium` (On-Demand para o mínimo) e Spot Instances para absorver os picos — economizando até 70% nos custos extras. Um Application Load Balancer distribui as requisições entre as instâncias, e o CloudWatch monitora a CPU para acionar o scaling automaticamente.
+**Scenario:** An online store has traffic spikes during Black Friday. The architect configures an Auto Scaling Group with `t3.medium` EC2 instances (On-Demand for the minimum) and Spot Instances to absorb the peaks — saving up to 70% on extra costs. An Application Load Balancer distributes requests across instances, and CloudWatch monitors CPU to trigger scaling automatically.

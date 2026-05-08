@@ -1,29 +1,29 @@
 # Amazon ElastiCache
 
-## O que é?
+## What is it?
 
-Amazon ElastiCache é um serviço de cache in-memory totalmente gerenciado compatível com **Redis** e **Memcached**. Permite recuperar informações de um cache rápido e gerenciado, em vez de depender inteiramente de bancos de dados mais lentos baseados em disco — melhorando drasticamente a performance das aplicações.
+Amazon ElastiCache is a fully managed in-memory caching service compatible with **Redis** and **Memcached**. It allows you to retrieve information from a fast, managed cache instead of relying entirely on slower disk-based databases — dramatically improving application performance.
 
-## Casos de uso
+## Use cases
 
-- Cache de resultados de consultas de banco de dados pesadas
-- Armazenamento de sessões de usuário
-- Ranking em tempo real (leaderboards) com Redis Sorted Sets
-- Cache de APIs para reduzir latência
-- Pub/Sub messaging com Redis
-- Filas de trabalho e contadores em tempo real
+- Caching results of heavy database queries
+- User session storage
+- Real-time leaderboards with Redis Sorted Sets
+- API caching to reduce latency
+- Pub/Sub messaging with Redis
+- Work queues and real-time counters
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
 - **Redis vs Memcached:**
-  - **Redis**: suporta estruturas de dados complexas (listas, sets, sorted sets, hashes), persistência, replicação, Multi-AZ, pub/sub — mais poderoso e recomendado
-  - **Memcached**: mais simples, multithreaded, apenas caching básico chave-valor — para casos de uso simples
-- **In-memory**: os dados ficam na memória RAM — muito mais rápido que disco (microssegundos vs milissegundos)
-- **Gerenciado pela AWS**: patches, backups, monitoramento, failover automático — sem gerenciar servidores
-- **Reduz carga no banco de dados**: aplicações consultam o cache primeiro; só vão ao banco se o dado não estiver em cache (cache miss)
-- **Volatil**: dados em memória são perdidos se o nó reiniciar (a menos que use persistência do Redis)
-- **Padrão típico**: Aplicação → ElastiCache → (se cache miss) → RDS/DynamoDB
+  - **Redis**: supports complex data structures (lists, sets, sorted sets, hashes), persistence, replication, Multi-AZ, pub/sub — more powerful and recommended
+  - **Memcached**: simpler, multithreaded, basic key-value caching only — for simple use cases
+- **In-memory**: data lives in RAM — much faster than disk (microseconds vs milliseconds)
+- **Managed by AWS**: patching, backups, monitoring, automatic failover — no server management
+- **Reduces database load**: applications query the cache first; only go to the database if the data is not in cache (cache miss)
+- **Volatile**: in-memory data is lost if the node restarts (unless Redis persistence is used)
+- **Typical pattern**: Application → ElastiCache → (on cache miss) → RDS/DynamoDB
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um portal de notícias tem uma query pesada que gera o ranking das 10 notícias mais lidas do dia — essa query leva 2 segundos no RDS e é executada 10 mil vezes por hora. Com ElastiCache Redis, o resultado da query é cacheado por 5 minutos. Na primeira execução, a query vai ao RDS (2s). Nas próximas execuções, o resultado vem do Redis em menos de 1ms. A carga no banco cai 99% e a experiência do usuário melhora significativamente.
+**Scenario:** A news portal has a heavy query that generates the ranking of the top 10 most-read stories of the day — this query takes 2 seconds on RDS and runs 10,000 times per hour. With ElastiCache Redis, the query result is cached for 5 minutes. On the first execution, the query hits RDS (2s). On subsequent executions, the result comes from Redis in under 1ms. Database load drops by 99% and user experience improves significantly.

@@ -1,35 +1,35 @@
 # Amazon S3 (Simple Storage Service)
 
-## O que é?
+## What is it?
 
-Amazon S3 é um serviço de armazenamento de objetos altamente durável, escalável e disponível. Permite armazenar e recuperar qualquer quantidade de dados de qualquer lugar na internet. Os dados são organizados em **buckets** (contêineres) e cada arquivo é armazenado como um **objeto** com uma chave única.
+Amazon S3 is a highly durable, scalable, and available object storage service. It lets you store and retrieve any amount of data from anywhere on the internet. Data is organized in **buckets** (containers) and each file is stored as an **object** with a unique key.
 
-## Casos de uso
+## Use cases
 
-- Hospedagem de sites estáticos (HTML, CSS, JS)
-- Armazenamento e distribuição de arquivos de mídia (imagens, vídeos)
-- Backup e recuperação de dados
-- Data lake para análises e big data
-- Armazenamento de logs de aplicações
-- Distribuição de conteúdo via CloudFront
+- Hosting static websites (HTML, CSS, JS)
+- Storing and distributing media files (images, videos)
+- Data backup and recovery
+- Data lake for analytics and big data
+- Application log storage
+- Content distribution via CloudFront
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Durabilidade**: 99,999999999% (11 noves) — dados replicados em múltiplos datacenters
-- **Classes de armazenamento** (custo x frequência de acesso):
-  - **S3 Standard**: dados acessados frequentemente
-  - **S3 Standard-IA** (Infrequent Access): dados acessados com pouca frequência, mas que precisam de acesso rápido
-  - **S3 One Zone-IA**: mais barato, mas armazenado em apenas uma AZ
-  - **S3 Glacier Instant Retrieval**: arquivamento com acesso em milissegundos
-  - **S3 Glacier Flexible Retrieval**: arquivamento com acesso em minutos a horas
-  - **S3 Glacier Deep Archive**: mais barato, acesso em 12 horas — para dados raramente acessados
-  - **S3 Intelligent-Tiering**: move automaticamente entre classes conforme o padrão de acesso
-- **Tamanho máximo de objeto**: 5 TB (upload multipart para arquivos > 100 MB)
-- O S3 é um serviço **global** mas os buckets são criados em uma região específica
-- **Bucket names são globalmente únicos** em toda a AWS
-- **S3 Object Lock** e **Versioning** para proteção de dados e conformidade
-- Por padrão, todos os buckets e objetos são **privados**
+- **Durability**: 99.999999999% (11 nines) — data replicated across multiple datacenters
+- **Storage classes** (cost vs. access frequency):
+  - **S3 Standard**: frequently accessed data
+  - **S3 Standard-IA** (Infrequent Access): infrequently accessed data that still requires rapid access
+  - **S3 One Zone-IA**: cheaper, but stored in only one AZ
+  - **S3 Glacier Instant Retrieval**: archival with millisecond access
+  - **S3 Glacier Flexible Retrieval**: archival with minutes-to-hours access
+  - **S3 Glacier Deep Archive**: cheapest, access within 12 hours — for rarely accessed data
+  - **S3 Intelligent-Tiering**: automatically moves data between classes based on access patterns
+- **Maximum object size**: 5 TB (multipart upload for files > 100 MB)
+- S3 is a **global** service but buckets are created in a specific region
+- **Bucket names are globally unique** across all of AWS
+- **S3 Object Lock** and **Versioning** for data protection and compliance
+- By default, all buckets and objects are **private**
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma empresa de streaming armazena vídeos no S3 Standard para os recém-lançados (acesso frequente), move para S3 Standard-IA após 30 dias, e para S3 Glacier Deep Archive após 1 ano. O S3 Lifecycle Policy automatiza essas transições, reduzindo os custos de armazenamento em até 80% ao longo do tempo. O CloudFront distribui o conteúdo globalmente com baixa latência.
+**Scenario:** A streaming company stores videos in S3 Standard for recently released content (frequent access), moves them to S3 Standard-IA after 30 days, and to S3 Glacier Deep Archive after 1 year. S3 Lifecycle Policies automate these transitions, reducing storage costs by up to 80% over time. CloudFront distributes the content globally with low latency.

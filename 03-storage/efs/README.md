@@ -1,31 +1,31 @@
 # Amazon EFS (Elastic File System)
 
-## O que é?
+## What is it?
 
-Amazon EFS é um sistema de arquivos **compartilhado e elástico** para uso com serviços AWS e recursos on-premises. Diferente do EBS (que é anexado a uma única instância), o EFS pode ser montado simultaneamente em múltiplas instâncias EC2 — funciona como um compartilhamento de rede (NFS).
+Amazon EFS is a **shared and elastic** file system for use with AWS services and on-premises resources. Unlike EBS (which is attached to a single instance), EFS can be mounted simultaneously on multiple EC2 instances — it works like a network share (NFS).
 
-## Casos de uso
+## Use cases
 
-- Compartilhamento de arquivos entre múltiplas instâncias EC2 (content management systems)
-- Armazenamento compartilhado para aplicações web em cluster
-- Processamento de big data e analytics que requerem acesso compartilhado
-- Ambientes de desenvolvimento com filesystem compartilhado entre a equipe
-- Containers (ECS/EKS) que precisam de armazenamento persistente compartilhado
+- File sharing between multiple EC2 instances (content management systems)
+- Shared storage for clustered web applications
+- Big data and analytics processing that requires shared access
+- Development environments with a shared filesystem across the team
+- Containers (ECS/EKS) that need shared persistent storage
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Multi-AZ**: o EFS é acessível em múltiplas zonas de disponibilidade da mesma região — alta disponibilidade por padrão
-- **Escalabilidade automática**: cresce e diminui automaticamente conforme você adiciona ou remove arquivos — sem provisionar capacidade
-- **Protocolo NFS**: compatível com Linux/Unix (não suporta Windows nativamente)
+- **Multi-AZ**: EFS is accessible across multiple Availability Zones in the same region — high availability by default
+- **Automatic scalability**: grows and shrinks automatically as you add or remove files — no capacity provisioning needed
+- **NFS protocol**: compatible with Linux/Unix (does not natively support Windows)
 - **Performance modes**:
-  - **General Purpose**: para a maioria dos casos de uso (latência menor)
-  - **Max I/O**: para workloads altamente paralelos (big data, media processing)
+  - **General Purpose**: for most use cases (lower latency)
+  - **Max I/O**: for highly parallel workloads (big data, media processing)
 - **Storage classes**:
-  - **EFS Standard**: dados acessados frequentemente
-  - **EFS Infrequent Access (IA)**: dados acessados raramente — menor custo
-- **Mais caro que EBS e S3** — use apenas quando precisar de armazenamento compartilhado entre instâncias
-- **EFS vs EBS**: EFS = compartilhado (multi-instância, multi-AZ); EBS = exclusivo (uma instância, uma AZ)
+  - **EFS Standard**: frequently accessed data
+  - **EFS Infrequent Access (IA)**: rarely accessed data — lower cost
+- **More expensive than EBS and S3** — use only when you need shared storage across instances
+- **EFS vs EBS**: EFS = shared (multi-instance, multi-AZ); EBS = exclusive (one instance, one AZ)
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um CMS (Content Management System) roda em 5 instâncias EC2 atrás de um Load Balancer. As imagens e arquivos de mídia enviados pelos usuários precisam estar disponíveis em todas as instâncias — se uma instância recebe o upload, as outras precisam acessar o mesmo arquivo. O EFS é montado em todas as 5 instâncias como `/var/www/uploads`, e qualquer arquivo salvo por uma instância é automaticamente disponível para todas as outras.
+**Scenario:** A CMS (Content Management System) runs on 5 EC2 instances behind a Load Balancer. Images and media files uploaded by users must be available across all instances — if one instance receives the upload, the others need to access the same file. EFS is mounted on all 5 instances as `/var/www/uploads`, and any file saved by one instance is automatically available to all the others.

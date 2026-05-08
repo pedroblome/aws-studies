@@ -1,43 +1,43 @@
-# Padrões de Arquitetura Serverless
+# Serverless Architecture Patterns
 
-## O que é?
+## What is it?
 
-Arquitetura serverless é um modelo de computação em nuvem onde o provedor gerencia toda a infraestrutura de servidor — o desenvolvedor foca apenas no código. Na AWS, serverless não significa "sem servidores", mas sim que você não gerencia servidores. Os padrões serverless são combinações de serviços AWS que resolvem problemas comuns sem provisionamento de infraestrutura.
+Serverless architecture is a cloud computing model where the provider manages all server infrastructure — the developer focuses only on the code. In AWS, serverless does not mean "no servers," but rather that you do not manage servers. Serverless patterns are combinations of AWS services that solve common problems without infrastructure provisioning.
 
-## Casos de uso
+## Use cases
 
-- APIs REST e backends para aplicações mobile e web
-- Processamento de eventos em tempo real (uploads, mensagens, streams)
-- Automação e orquestração de workflows
-- Chatbots e assistentes virtuais
-- Processamento de dados em batch sem servidores
-- Webhooks e integrações entre sistemas
+- REST APIs and backends for mobile and web applications
+- Real-time event processing (uploads, messages, streams)
+- Workflow automation and orchestration
+- Chatbots and virtual assistants
+- Batch data processing without servers
+- Webhooks and system integrations
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-**Serviços serverless principais na AWS:**
-- **Computação**: AWS Lambda
+**Primary serverless services on AWS:**
+- **Compute**: AWS Lambda
 - **API**: Amazon API Gateway
-- **Banco de dados**: Amazon DynamoDB, Aurora Serverless
-- **Armazenamento**: Amazon S3
-- **Mensageria**: Amazon SQS, SNS, EventBridge
-- **Orquestração**: AWS Step Functions
-- **Autenticação**: Amazon Cognito
+- **Database**: Amazon DynamoDB, Aurora Serverless
+- **Storage**: Amazon S3
+- **Messaging**: Amazon SQS, SNS, EventBridge
+- **Orchestration**: AWS Step Functions
+- **Authentication**: Amazon Cognito
 
-**Padrões arquiteturais comuns:**
+**Common architectural patterns:**
 
-1. **API Serverless**: API Gateway → Lambda → DynamoDB
-2. **Event Processing**: S3 Upload → Lambda → processamento → S3/DynamoDB
-3. **Fan-out**: SNS → múltiplos SQS → múltiplos Lambda (processamento paralelo)
-4. **Workflow**: Step Functions orquestran múltiplos Lambda em sequência com lógica de negócio
-5. **Scheduled Jobs**: EventBridge Scheduler → Lambda (substituto serverless do cron)
+1. **Serverless API**: API Gateway → Lambda → DynamoDB
+2. **Event Processing**: S3 Upload → Lambda → processing → S3/DynamoDB
+3. **Fan-out**: SNS → multiple SQS queues → multiple Lambda functions (parallel processing)
+4. **Workflow**: Step Functions orchestrates multiple Lambda functions in sequence with business logic
+5. **Scheduled Jobs**: EventBridge Scheduler → Lambda (serverless cron replacement)
 
-**Vantagens do serverless:**
-- **Sem gerenciamento de servidor**: foco total no código de negócio
-- **Escala automática**: de zero a milhões de requisições sem configuração
-- **Pay-per-use**: pague apenas pelo que usar — zero custo quando não há tráfego
-- **Alta disponibilidade**: built-in por padrão nos serviços gerenciados
+**Advantages of serverless:**
+- **No server management**: complete focus on business code
+- **Automatic scaling**: from zero to millions of requests with no configuration
+- **Pay-per-use**: pay only for what you use — zero cost when there is no traffic
+- **High availability**: built-in by default in managed services
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um aplicativo de delivery precisa processar pedidos em tempo real. Arquitetura serverless: o app mobile chama uma API REST (API Gateway) → Lambda valida o pedido e salva no DynamoDB → DynamoDB Streams aciona outro Lambda → que publica no SNS → que fan-out para: (1) Lambda notifica o restaurante via SMS (SNS); (2) SQS enfileira para o sistema de rastreamento. Step Functions orquestra o fluxo de estados do pedido (recebido → preparando → saiu para entrega → entregue). Zero servidores — escala para 100 mil pedidos simultâneos automaticamente.
+**Scenario:** A delivery app needs to process orders in real time. Serverless architecture: the mobile app calls a REST API (API Gateway) → Lambda validates the order and saves it to DynamoDB → DynamoDB Streams triggers another Lambda → which publishes to SNS → which fans out to: (1) Lambda notifies the restaurant via SMS; (2) SQS queues the message for the tracking system. Step Functions orchestrates the order state machine (received → preparing → out for delivery → delivered). Zero servers — scales to 100,000 simultaneous orders automatically.

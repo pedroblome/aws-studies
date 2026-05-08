@@ -1,30 +1,30 @@
 # Amazon S3 Glacier
 
-## O que é?
+## What is it?
 
-Amazon S3 Glacier é um serviço de armazenamento em nuvem de **baixo custo** projetado para **arquivamento de dados** e **backup de longo prazo**. Os dados armazenados no Glacier são raramente acessados, mas precisam ser retidos por meses, anos ou décadas — tipicamente para fins de conformidade regulatória.
+Amazon S3 Glacier is a **low-cost** cloud storage service designed for **data archiving** and **long-term backup**. Data stored in Glacier is rarely accessed but needs to be retained for months, years, or decades — typically for regulatory compliance purposes.
 
-## Casos de uso
+## Use cases
 
-- Arquivamento de registros médicos (obrigação legal de retenção por 20+ anos)
-- Backup de longo prazo de dados corporativos
-- Arquivamento de logs e dados de auditoria
-- Preservação de dados científicos e históricos
-- Substituição de fitas magnéticas (tape backup) físicas
+- Archiving medical records (legal retention obligation for 20+ years)
+- Long-term backup of corporate data
+- Archiving audit logs and compliance data
+- Preservation of scientific and historical data
+- Replacing physical magnetic tape (tape backup) systems
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Variantes do Glacier** (dentro do S3):
-  - **S3 Glacier Instant Retrieval**: recuperação em milissegundos — ideal para dados acessados trimestalmente
-  - **S3 Glacier Flexible Retrieval**: recuperação em minutos (Expedited), horas (Standard) ou 5-12 horas (Bulk) — mais barato
-  - **S3 Glacier Deep Archive**: mais barato de todos — recuperação em até 12 horas (Standard) ou 48 horas (Bulk)
-- **Custo muito baixo**: Deep Archive custa cerca de $0.00099/GB/mês — até 23x mais barato que o S3 Standard
-- **Vault**: contêiner para armazenar arquivos no Glacier (equivalente ao bucket do S3)
-- **Archive**: cada item armazenado no Glacier (equivalente ao objeto do S3)
-- **Vault Lock**: política imutável para conformidade — dados não podem ser deletados antes do prazo (WORM: Write Once Read Many)
-- **S3 Lifecycle Policies** podem mover dados automaticamente do S3 para o Glacier após um período definido
-- Não é adequado para dados que precisam de acesso frequente ou imediato
+- **Glacier variants** (within S3):
+  - **S3 Glacier Instant Retrieval**: retrieval in milliseconds — ideal for data accessed quarterly
+  - **S3 Glacier Flexible Retrieval**: retrieval in minutes (Expedited), hours (Standard), or 5–12 hours (Bulk) — cheaper
+  - **S3 Glacier Deep Archive**: cheapest of all — retrieval within 12 hours (Standard) or 48 hours (Bulk)
+- **Very low cost**: Deep Archive costs approximately $0.00099/GB/month — up to 23x cheaper than S3 Standard
+- **Vault**: container for storing archives in Glacier (equivalent to an S3 bucket)
+- **Archive**: each item stored in Glacier (equivalent to an S3 object)
+- **Vault Lock**: immutable compliance policy — data cannot be deleted before a set deadline (WORM: Write Once Read Many)
+- **S3 Lifecycle Policies** can automatically move data from S3 to Glacier after a defined period
+- Not suitable for data that requires frequent or immediate access
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um hospital é obrigado por lei a manter prontuários médicos por 20 anos. Os prontuários dos últimos 2 anos ficam no S3 Standard (acesso frequente para consultas). Após 2 anos, uma Lifecycle Policy move automaticamente para S3 Standard-IA. Após 5 anos, os dados vão para S3 Glacier Deep Archive — custando centavos por GB. Um Vault Lock garante que os dados não possam ser deletados antes do prazo legal, atendendo aos requisitos de conformidade regulatória.
+**Scenario:** A hospital is legally required to retain medical records for 20 years. Records from the last 2 years remain in S3 Standard (frequent access for consultations). After 2 years, a Lifecycle Policy automatically moves them to S3 Standard-IA. After 5 years, data moves to S3 Glacier Deep Archive — costing cents per GB. A Vault Lock ensures data cannot be deleted before the legal deadline, satisfying regulatory compliance requirements.

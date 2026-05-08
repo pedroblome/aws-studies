@@ -1,26 +1,26 @@
 # IAM Users
 
-## O que é?
+## What is it?
 
-IAM Users (Usuários IAM) são identidades criadas dentro da sua conta AWS que representam uma pessoa ou aplicação que interage com os serviços AWS. Cada usuário possui credenciais únicas (senha e/ou chaves de acesso) e permissões específicas que controlam o que ele pode fazer.
+IAM Users are identities created inside your AWS account that represent a person or application interacting with AWS services. Each user has unique credentials (password and/or access keys) and specific permissions that control what they can do.
 
-## Casos de uso
+## Use cases
 
-- Fornecer acesso individual ao Console de Gerenciamento AWS para membros da equipe
-- Criar credenciais programáticas (Access Key ID + Secret Access Key) para aplicações e scripts
-- Configurar acesso com MFA (Multi-Factor Authentication) para maior segurança
-- Auditar atividades individuais de cada colaborador via AWS CloudTrail
+- Provide individual access to the AWS Management Console for team members
+- Create programmatic credentials (Access Key ID + Secret Access Key) for applications and scripts
+- Configure MFA (Multi-Factor Authentication) access for stronger security
+- Audit individual activity per collaborator through AWS CloudTrail
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- Um usuário IAM é uma identidade com permissões de longo prazo — diferente de roles que fornecem acesso temporário
-- Por padrão, um novo usuário IAM não tem nenhuma permissão (princípio do menor privilégio)
-- Usuários podem pertencer a **grupos IAM**, herdando as políticas do grupo
-- As credenciais do **root account** NÃO devem ser usadas no dia a dia — crie usuários IAM com permissões adequadas
-- MFA adiciona uma segunda camada de segurança além da senha
-- Limite de **5.000 usuários IAM** por conta AWS
-- Chaves de acesso (Access Keys) são usadas para acesso via CLI/API, não para o Console
+- An IAM user is an identity with long-term permissions — unlike roles, which provide temporary access
+- By default, a new IAM user has no permissions at all (principle of least privilege)
+- Users can belong to **IAM groups**, inheriting the group's policies
+- **Root account** credentials should NOT be used for daily tasks — create IAM users with appropriate permissions
+- MFA adds a second layer of security beyond the password
+- Limit of **5,000 IAM users** per AWS account
+- Access Keys are used for CLI/API access, not for the Console
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma empresa contratou um novo desenvolvedor. O administrador cria um usuário IAM chamado `joao.silva`, adiciona ao grupo `Developers` (que já possui políticas de acesso ao EC2 e S3), e habilita MFA. O desenvolvedor usa sua senha para acessar o Console e suas chaves de acesso para fazer deploy via CLI — sem nunca precisar das credenciais root.
+**Scenario:** A company hired a new developer. The administrator creates an IAM user called `john.doe`, adds them to the `Developers` group (which already has EC2 and S3 access policies), and enables MFA. The developer uses their password to access the Console and their access keys to deploy via CLI — without ever needing the root credentials.

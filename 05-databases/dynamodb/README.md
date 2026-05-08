@@ -1,32 +1,32 @@
 # Amazon DynamoDB
 
-## O que é?
+## What is it?
 
-Amazon DynamoDB é um banco de dados NoSQL totalmente gerenciado, serverless, de alta performance e escalabilidade ilimitada. Oferece latência de um dígito de milissegundos para qualquer escala — de alguns itens a trilhões de registros e petabytes de dados.
+Amazon DynamoDB is a fully managed, serverless NoSQL database with high performance and unlimited scalability. It offers single-digit millisecond latency at any scale — from a few items to trillions of records and petabytes of data.
 
-## Casos de uso
+## Use cases
 
-- Carrinho de compras e sessões de usuário em e-commerce
-- Catálogos de produtos com atributos variáveis
-- Dados de jogos (leaderboards, perfis de jogadores)
-- IoT — ingestão de dados de sensores em tempo real
-- Aplicações serverless com Lambda (combinação natural)
-- Cache de dados e metadados de aplicações
+- Shopping cart and user sessions in e-commerce
+- Product catalogs with variable attributes
+- Gaming data (leaderboards, player profiles)
+- IoT — real-time ingestion of sensor data
+- Serverless applications with Lambda (a natural combination)
+- Application data and metadata caching
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **NoSQL**: armazena dados como documentos ou pares chave-valor — sem esquema fixo (schema-less)
-- **Serverless**: sem servidores para gerenciar — capacidade escala automaticamente
-- **Modelos de capacidade:**
-  - **On-Demand**: pague por requisição — ideal para tráfego imprevisível
-  - **Provisioned**: defina RCUs e WCUs — mais barato com tráfego previsível
-- **Primary Key**: composta por **Partition Key** (obrigatória) + **Sort Key** (opcional)
-- **DynamoDB Streams**: captura alterações nos dados em tempo real — ideal para acionar Lambda
-- **DAX (DynamoDB Accelerator)**: cache in-memory para DynamoDB — reduz latência de milissegundos para microssegundos
-- **Global Tables**: replicação multi-região totalmente gerenciada — acesso com baixa latência globalmente
-- **Diferente do RDS**: não suporta SQL, joins ou transações complexas tradicionais — mas é muito mais escalável e rápido para padrões de acesso simples
-- Replicação automática em múltiplas AZs — altamente disponível por padrão
+- **NoSQL**: stores data as documents or key-value pairs — no fixed schema (schema-less)
+- **Serverless**: no servers to manage — capacity scales automatically
+- **Capacity modes:**
+  - **On-Demand**: pay per request — ideal for unpredictable traffic
+  - **Provisioned**: define RCUs and WCUs — cheaper with predictable traffic
+- **Primary Key**: composed of a **Partition Key** (required) + **Sort Key** (optional)
+- **DynamoDB Streams**: captures data changes in real time — ideal for triggering Lambda
+- **DAX (DynamoDB Accelerator)**: in-memory cache for DynamoDB — reduces latency from milliseconds to microseconds
+- **Global Tables**: fully managed multi-region replication — low-latency global access
+- **Different from RDS**: does not support SQL, joins, or traditional complex transactions — but far more scalable and faster for simple access patterns
+- Automatic replication across multiple AZs — highly available by default
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um aplicativo de ride-sharing precisa armazenar a localização em tempo real de 500 mil motoristas, atualizada a cada 5 segundos. Um banco relacional não aguentaria a carga. Com DynamoDB On-Demand, cada atualização de localização é uma operação `PutItem` com a chave de partição sendo o ID do motorista. O DynamoDB escala automaticamente para absorver 500 mil escritas por segundo e lê a localização de qualquer motorista em menos de 1ms — sem nenhum servidor para gerenciar.
+**Scenario:** A ride-sharing app needs to store the real-time location of 500,000 drivers, updated every 5 seconds. A relational database could not handle the load. With DynamoDB On-Demand, each location update is a `PutItem` operation with the driver's ID as the partition key. DynamoDB automatically scales to absorb 500,000 writes per second and reads any driver's location in under 1ms — with no servers to manage.

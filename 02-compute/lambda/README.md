@@ -1,28 +1,28 @@
 # AWS Lambda
 
-## O que é?
+## What is it?
 
-AWS Lambda é um serviço de computação **serverless** (sem servidor) que executa seu código em resposta a eventos, sem que você precise provisionar ou gerenciar servidores. Você paga apenas pelo tempo de execução do código — medido em milissegundos.
+AWS Lambda is a **serverless** compute service that runs your code in response to events, without you needing to provision or manage servers. You pay only for the execution time of the code — measured in milliseconds.
 
-## Casos de uso
+## Use cases
 
-- APIs e backends serverless (integrado com API Gateway)
-- Processamento de eventos em tempo real (uploads no S3, mensagens no SQS/SNS)
-- Automação de tarefas e agendamento (similar ao cron, via EventBridge)
-- Transformação e processamento de dados (ETL leve)
-- Webhooks e integrações entre sistemas
+- Serverless APIs and backends (integrated with API Gateway)
+- Real-time event processing (S3 uploads, SQS/SNS messages)
+- Task automation and scheduling (similar to cron, via EventBridge)
+- Data transformation and processing (lightweight ETL)
+- Webhooks and system integrations
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Serverless**: você não gerencia servidores — a AWS cuida de toda a infraestrutura
-- **Event-driven**: o Lambda é acionado por eventos (HTTP via API Gateway, upload no S3, mensagem no SQS, etc.)
-- **Precificação**: cobrança por número de requisições e duração da execução — primeiros 1 milhão de requisições/mês são gratuitas (free tier permanente)
-- **Tempo máximo de execução**: 15 minutos por invocação
-- **Linguagens suportadas**: Python, Node.js, Java, Go, Ruby, C#, e runtimes customizados
-- **Escala automaticamente**: de zero a milhares de execuções simultâneas sem configuração
-- **Lambda é FaaS** (Function as a Service) — o menor nível de abstração no modelo serverless
-- Integra-se nativamente com dezenas de serviços AWS
+- **Serverless**: you do not manage servers — AWS handles all the infrastructure
+- **Event-driven**: Lambda is triggered by events (HTTP via API Gateway, S3 upload, SQS message, etc.)
+- **Pricing**: charged by number of requests and execution duration — the first 1 million requests/month are free (permanent free tier)
+- **Maximum execution time**: 15 minutes per invocation
+- **Supported languages**: Python, Node.js, Java, Go, Ruby, C#, and custom runtimes
+- **Scales automatically**: from zero to thousands of concurrent executions without configuration
+- **Lambda is FaaS** (Function as a Service) — the smallest abstraction level in the serverless model
+- Integrates natively with dozens of AWS services
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um e-commerce precisa redimensionar automaticamente imagens enviadas por usuários. Quando um usuário faz upload de uma foto para um bucket S3, um evento aciona uma função Lambda que processa a imagem (redimensiona, comprime), salva a versão otimizada em outro bucket S3 e registra o resultado no DynamoDB. Tudo sem servidores — o time não precisa gerenciar nenhuma infraestrutura.
+**Scenario:** An e-commerce platform needs to automatically resize images uploaded by users. When a user uploads a photo to an S3 bucket, an event triggers a Lambda function that processes the image (resizes, compresses), saves the optimized version to another S3 bucket, and logs the result in DynamoDB. All without servers — the team does not need to manage any infrastructure.

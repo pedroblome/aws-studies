@@ -1,28 +1,28 @@
 # Amazon SNS (Simple Notification Service)
 
-## O que é?
+## What is it?
 
-Amazon SNS é um serviço de mensagens pub/sub (publicação/assinatura) totalmente gerenciado que permite enviar notificações para múltiplos destinatários simultaneamente. Um produtor publica uma mensagem em um **tópico** e o SNS entrega essa mensagem a todos os **assinantes** daquele tópico.
+Amazon SNS is a fully managed pub/sub (publish/subscribe) messaging service that allows you to send notifications to multiple recipients simultaneously. A producer publishes a message to a **topic** and SNS delivers that message to all **subscribers** of that topic.
 
-## Casos de uso
+## Use cases
 
-- Notificações push para aplicativos mobile (iOS, Android)
-- Envio de alertas via e-mail e SMS para equipes de operações
-- Fan-out: disparar múltiplas ações em paralelo a partir de um evento
-- Notificações em tempo real para usuários
-- Integração com SQS para arquitetura fan-out (SNS → múltiplas filas SQS)
+- Push notifications to mobile applications (iOS, Android)
+- Sending alerts via email and SMS to operations teams
+- Fan-out: trigger multiple parallel actions from a single event
+- Real-time notifications for users
+- Integration with SQS for fan-out architecture (SNS → multiple SQS queues)
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Modelo Pub/Sub**: publicadores enviam para tópicos; assinantes (subscribers) recebem automaticamente
-- **Protocolos de entrega**: HTTP/HTTPS, e-mail, e-mail JSON, SMS, SQS, Lambda, aplicações mobile (push)
-- **Fan-out pattern**: uma mensagem publicada em um tópico SNS é entregue simultaneamente a múltiplas filas SQS — padrão clássico para processamento paralelo
-- **Push-based**: o SNS empurra mensagens para os assinantes (diferente do SQS onde o consumidor puxa)
-- **SNS FIFO**: tópicos com entrega ordenada e sem duplicatas — para casos que exigem ordem
-- **Message Filtering**: assinantes podem filtrar quais mensagens receber com base em atributos — evita processar mensagens irrelevantes
-- **Sem retenção**: o SNS não armazena mensagens — se um assinante não estiver disponível, a mensagem é perdida (use SQS para garantir entrega)
-- Limite de **12,5 milhões de assinaturas** por tópico
+- **Pub/Sub model**: publishers send to topics; subscribers receive automatically
+- **Delivery protocols**: HTTP/HTTPS, email, email-JSON, SMS, SQS, Lambda, mobile push applications
+- **Fan-out pattern**: a message published to an SNS topic is delivered simultaneously to multiple SQS queues — classic pattern for parallel processing
+- **Push-based**: SNS pushes messages to subscribers (unlike SQS, where the consumer pulls)
+- **SNS FIFO**: topics with ordered delivery and no duplicates — for cases requiring ordering
+- **Message Filtering**: subscribers can filter which messages they receive based on attributes — avoids processing irrelevant messages
+- **No retention**: SNS does not store messages — if a subscriber is unavailable, the message is lost (use SQS to guarantee delivery)
+- Limit of **12.5 million subscriptions** per topic
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um sistema de monitoramento de infraestrutura detecta que um servidor está com CPU acima de 90%. Um alarme do CloudWatch publica uma mensagem no tópico SNS `AlertasCriticos`. O SNS entrega simultaneamente: (1) um e-mail para o time de Ops, (2) um SMS para o plantão de suporte, (3) uma mensagem para uma fila SQS que aciona um Lambda para tentar remediar automaticamente o problema. Um único evento dispara três ações paralelas.
+**Scenario:** An infrastructure monitoring system detects a server with CPU above 90%. A CloudWatch alarm publishes a message to the SNS topic `CriticalAlerts`. SNS simultaneously delivers: (1) an email to the Ops team, (2) an SMS to the on-call support, (3) a message to an SQS queue that triggers a Lambda to automatically try to remediate the issue. A single event triggers three parallel actions.

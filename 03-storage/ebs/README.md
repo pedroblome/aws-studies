@@ -1,31 +1,31 @@
 # Amazon EBS (Elastic Block Store)
 
-## O que é?
+## What is it?
 
-Amazon EBS é um serviço de armazenamento em bloco de alta performance projetado para uso com instâncias EC2. Funciona como um HD/SSD virtual que pode ser anexado a uma instância EC2, fornecendo armazenamento persistente que sobrevive ao desligamento da instância.
+Amazon EBS is a high-performance block storage service designed for use with EC2 instances. It works like a virtual HDD/SSD that can be attached to an EC2 instance, providing persistent storage that survives instance shutdown.
 
-## Casos de uso
+## Use cases
 
-- Disco do sistema operacional de instâncias EC2
-- Armazenamento de bancos de dados (MySQL, PostgreSQL, Oracle)
-- Aplicações que requerem baixa latência e alta performance de I/O
-- Armazenamento de dados transacionais que precisam persistir
-- Volumes de boot para instâncias EC2
+- Operating system disk for EC2 instances
+- Database storage (MySQL, PostgreSQL, Oracle)
+- Applications requiring low latency and high I/O performance
+- Transactional data storage that must persist
+- Boot volumes for EC2 instances
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Vinculado a uma única AZ** — um volume EBS só pode ser anexado a uma instância EC2 na mesma zona de disponibilidade
-- **Persistente**: os dados sobrevivem ao desligamento da instância (diferente do Instance Store)
-- **Tipos de volume EBS:**
-  - **gp3/gp2** (General Purpose SSD): uso geral, balanceia preço e performance — mais comum
-  - **io2/io1** (Provisioned IOPS SSD): alta performance para bancos de dados críticos
-  - **st1** (Throughput Optimized HDD): big data, data warehouses — alta vazão
-  - **sc1** (Cold HDD): dados acessados raramente — mais barato
-- **Snapshots**: backups incrementais do EBS armazenados no S3 — podem ser usados para criar volumes em outras AZs/regiões
-- **Diferente do S3**: EBS é armazenamento em bloco (como um HD), S3 é armazenamento de objetos (como um servidor de arquivos)
-- Um volume EBS pode ser **anexado a apenas uma instância EC2** por vez (exceto io1/io2 com Multi-Attach)
-- Você paga pela capacidade provisionada, não pelo uso real
+- **Bound to a single AZ** — an EBS volume can only be attached to an EC2 instance in the same Availability Zone
+- **Persistent**: data survives instance shutdown (unlike Instance Store)
+- **EBS volume types:**
+  - **gp3/gp2** (General Purpose SSD): general use, balances price and performance — most common
+  - **io2/io1** (Provisioned IOPS SSD): high performance for critical databases
+  - **st1** (Throughput Optimized HDD): big data, data warehouses — high throughput
+  - **sc1** (Cold HDD): rarely accessed data — cheapest
+- **Snapshots**: incremental EBS backups stored in S3 — can be used to create volumes in other AZs/regions
+- **Different from S3**: EBS is block storage (like a hard drive); S3 is object storage (like a file server)
+- A volume can be **attached to only one EC2 instance** at a time (except io1/io2 with Multi-Attach)
+- You pay for provisioned capacity, not actual usage
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um banco de dados PostgreSQL roda em uma instância EC2 com um volume EBS `gp3` de 500 GB como disco de dados. O time configura snapshots diários automáticos via AWS Backup. Quando a instância precisa de mais espaço, o volume é expandido de 500 GB para 1 TB sem downtime — e quando o banco precisa migrar para outra região, o snapshot é copiado para a nova região e um novo volume é criado a partir dele.
+**Scenario:** A PostgreSQL database runs on an EC2 instance with a 500 GB `gp3` EBS volume as the data disk. The team configures automated daily snapshots via AWS Backup. When the instance needs more space, the volume is expanded from 500 GB to 1 TB without downtime — and when the database needs to migrate to another region, the snapshot is copied to the new region and a new volume is created from it.

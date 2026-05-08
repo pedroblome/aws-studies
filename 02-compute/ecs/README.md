@@ -1,28 +1,28 @@
 # Amazon ECS (Elastic Container Service)
 
-## O que é?
+## What is it?
 
-Amazon ECS é um serviço de orquestração de contêineres totalmente gerenciado que permite executar, escalar e gerenciar aplicações em contêineres Docker na AWS. O ECS elimina a necessidade de instalar e operar sua própria infraestrutura de orquestração de contêineres.
+Amazon ECS is a fully managed container orchestration service that allows you to run, scale, and manage Docker container applications on AWS. ECS eliminates the need to install and operate your own container orchestration infrastructure.
 
-## Casos de uso
+## Use cases
 
-- Executar microsserviços em contêineres Docker
-- Migração de aplicações monolíticas para arquitetura de microsserviços
-- Pipelines de CI/CD que deployam imagens de contêiner
-- Processamento em lote com contêineres
-- Aplicações web altamente escaláveis em contêineres
+- Run microservices in Docker containers
+- Migrate monolithic applications to a microservices architecture
+- CI/CD pipelines that deploy container images
+- Batch processing with containers
+- Highly scalable web applications in containers
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Dois modos de execução (launch types):**
-  - **EC2 Launch Type**: você gerencia as instâncias EC2 que hospedam os contêineres
-  - **Fargate Launch Type**: **serverless** — a AWS gerencia a infraestrutura subjacente, você só define CPU/memória para o contêiner
-- **Integra-se nativamente** com ECR (repositório de imagens), Load Balancer, IAM, CloudWatch
-- **Task Definition**: define como um contêiner deve ser executado (imagem, CPU, memória, variáveis de ambiente)
-- **Service**: garante que um número específico de tasks esteja sempre rodando
-- **ECS vs EKS**: ECS é mais simples e integrado à AWS; EKS usa Kubernetes e é mais complexo mas mais portável
-- Fargate é a opção **serverless** para contêineres — elimina o gerenciamento de servidores
+- **Two launch types:**
+  - **EC2 Launch Type**: you manage the EC2 instances that host the containers
+  - **Fargate Launch Type**: **serverless** — AWS manages the underlying infrastructure; you only define CPU/memory for the container
+- **Natively integrates** with ECR (image registry), Load Balancer, IAM, and CloudWatch
+- **Task Definition**: defines how a container should run (image, CPU, memory, environment variables)
+- **Service**: ensures a specific number of tasks are always running
+- **ECS vs EKS**: ECS is simpler and AWS-integrated; EKS uses Kubernetes and is more complex but more portable
+- Fargate is the **serverless** option for containers — eliminates server management
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma fintech tem uma API REST empacotada em Docker. Com ECS + Fargate, o time faz deploy da imagem do ECR sem se preocupar com servidores. Um Application Load Balancer distribui o tráfego, e o ECS Service garante que sempre haja 3 tasks rodando. Quando o CloudWatch detecta aumento de CPU, o ECS Auto Scaling sobe novas tasks automaticamente — tudo sem gerenciar nenhuma instância EC2.
+**Scenario:** A fintech has a REST API packaged in Docker. With ECS + Fargate, the team deploys the image from ECR without worrying about servers. An Application Load Balancer distributes traffic, and the ECS Service ensures 3 tasks are always running. When CloudWatch detects a CPU spike, ECS Auto Scaling launches new tasks automatically — all without managing any EC2 instances.

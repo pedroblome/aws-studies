@@ -1,29 +1,29 @@
 # Amazon CloudFront
 
-## O que é?
+## What is it?
 
-Amazon CloudFront é a rede de distribuição de conteúdo (CDN — Content Delivery Network) da AWS. Distribui conteúdo (páginas web, imagens, vídeos, APIs) globalmente através de uma rede de **edge locations** (pontos de presença) ao redor do mundo, entregando conteúdo com baixíssima latência para os usuários finais.
+Amazon CloudFront is AWS's Content Delivery Network (CDN). It distributes content (web pages, images, videos, APIs) globally through a network of **edge locations** (points of presence) around the world, delivering content with very low latency to end users.
 
-## Casos de uso
+## Use cases
 
-- Acelerar a entrega de sites estáticos e dinâmicos globalmente
-- Distribuição de conteúdo de mídia (streaming de vídeo)
-- Proteção de APIs com baixa latência global
-- Distribuição segura de software e atualizações
-- Proteção contra DDoS integrada com AWS Shield
-- Servir conteúdo do S3 com baixa latência globalmente
+- Accelerate the delivery of static and dynamic websites globally
+- Media content distribution (video streaming)
+- Protecting APIs with low global latency
+- Secure distribution of software and updates
+- DDoS protection integrated with AWS Shield
+- Serve S3 content globally with low latency
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Edge Locations**: pontos de presença da AWS onde o conteúdo é armazenado em cache — há muito mais edge locations do que regiões e AZs
-- **Origin**: a fonte original do conteúdo — pode ser um bucket S3, um ELB, uma instância EC2 ou qualquer servidor HTTP
-- **Cache**: o CloudFront armazena o conteúdo em cache nas edge locations, reduzindo a carga no origem e a latência para o usuário
-- **TTL (Time to Live)**: define por quanto tempo o conteúdo fica em cache antes de ser renovado
-- **HTTPS por padrão**: suporta SSL/TLS com certificados gerenciados pelo ACM (AWS Certificate Manager) gratuitamente
-- **AWS Shield Standard**: proteção contra DDoS **incluída gratuitamente** no CloudFront
-- **Geo-restriction**: permite bloquear ou permitir acesso de países específicos
-- **CloudFront vs S3 direto**: CloudFront adiciona cache global e reduz latência; use CloudFront para conteúdo acessado globalmente
+- **Edge Locations**: AWS points of presence where content is cached — there are many more edge locations than regions and AZs
+- **Origin**: the original source of the content — can be an S3 bucket, an ELB, an EC2 instance, or any HTTP server
+- **Cache**: CloudFront caches content at edge locations, reducing origin load and user latency
+- **TTL (Time to Live)**: defines how long content is cached before being refreshed
+- **HTTPS by default**: supports SSL/TLS with certificates managed by ACM (AWS Certificate Manager) for free
+- **AWS Shield Standard**: DDoS protection **included for free** with CloudFront
+- **Geo-restriction**: allows blocking or allowing access from specific countries
+- **CloudFront vs direct S3**: CloudFront adds global caching and reduces latency; use CloudFront for globally accessed content
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um portal de notícias brasileiro está crescendo e recebe visitas de todo o mundo. Os arquivos estáticos (imagens, CSS, JS) ficam armazenados em um bucket S3 na região sa-east-1 (São Paulo). Sem CloudFront, usuários na Europa ou Ásia experimentam alta latência. Com CloudFront configurado, as imagens são cacheadas automaticamente nas edge locations mais próximas de cada usuário — um leitor em Tóquio recebe o conteúdo da edge location no Japão, reduzindo a latência de ~300ms para ~5ms.
+**Scenario:** A news portal is growing and receiving visits from all over the world. Static files (images, CSS, JS) are stored in an S3 bucket in the sa-east-1 (Sao Paulo) region. Without CloudFront, users in Europe or Asia experience high latency. With CloudFront configured, images are automatically cached at the edge locations closest to each user — a reader in Tokyo receives content from the edge location in Japan, reducing latency from ~300ms to ~5ms.

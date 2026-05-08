@@ -1,26 +1,26 @@
 # IAM Roles
 
-## O que é?
+## What is it?
 
-IAM Roles (Funções IAM) são identidades AWS com permissões específicas que podem ser assumidas temporariamente por usuários, aplicações ou serviços AWS. Diferente dos usuários IAM, roles não possuem credenciais de longo prazo — as credenciais são geradas dinamicamente e expiram automaticamente.
+IAM Roles are AWS identities with specific permissions that can be temporarily assumed by users, applications, or AWS services. Unlike IAM users, roles do not have long-term credentials — credentials are generated dynamically and expire automatically.
 
-## Casos de uso
+## Use cases
 
-- Permitir que instâncias EC2 acessem o S3 sem armazenar chaves de acesso no servidor
-- Conceder acesso entre contas AWS (cross-account access)
-- Permitir que serviços AWS (Lambda, ECS, etc.) interajam com outros serviços
-- Acesso federado — usuários autenticados via Active Directory ou provedores de identidade externos (Google, Facebook) assumem uma role
-- Acesso temporário para auditores externos sem criar usuários permanentes
+- Allow EC2 instances to access S3 without storing access keys on the server
+- Grant cross-account access between AWS accounts
+- Allow AWS services (Lambda, ECS, etc.) to interact with other services
+- Federated access — users authenticated via Active Directory or external identity providers (Google, Facebook) assume a role
+- Temporary access for external auditors without creating permanent users
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- Roles fornecem credenciais **temporárias e rotacionadas automaticamente** via AWS STS (Security Token Service)
-- São a forma **recomendada** de conceder permissões a serviços AWS (ex: Lambda, EC2)
-- Uma role possui uma **Trust Policy** (quem pode assumir a role) e uma **Permission Policy** (o que pode fazer)
-- Não há usuário/senha associados a uma role — ela é "assumida" (assumed)
-- Muito usada em cenários de **federação de identidade** com SSO corporativo
-- Pode ser atribuída a instâncias EC2 via **Instance Profile**
+- Roles provide **temporary, automatically rotated credentials** via AWS STS (Security Token Service)
+- They are the **recommended** way to grant permissions to AWS services (e.g., Lambda, EC2)
+- A role has a **Trust Policy** (who can assume the role) and a **Permission Policy** (what they can do)
+- There is no username/password associated with a role — it is "assumed"
+- Widely used in **identity federation** scenarios with corporate SSO
+- Can be assigned to EC2 instances via an **Instance Profile**
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma aplicação rodando em uma instância EC2 precisa ler objetos de um bucket S3. Em vez de armazenar chaves de acesso na instância (risco de segurança), o administrador cria uma IAM Role com a política `AmazonS3ReadOnlyAccess` e associa ao Instance Profile da EC2. A aplicação chama automaticamente o serviço de metadados da instância para obter credenciais temporárias — sem nenhuma chave hardcoded no código.
+**Scenario:** An application running on an EC2 instance needs to read objects from an S3 bucket. Instead of storing access keys on the instance (a security risk), the administrator creates an IAM Role with the `AmazonS3ReadOnlyAccess` policy and attaches it to the EC2's Instance Profile. The application automatically calls the instance metadata service to obtain temporary credentials — with no hardcoded keys in the code.

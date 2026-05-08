@@ -1,32 +1,32 @@
 # Amazon VPC (Virtual Private Cloud)
 
-## O que é?
+## What is it?
 
-Amazon VPC é uma rede virtual privada isolada logicamente dentro da AWS Cloud. É a sua própria seção da AWS Cloud onde você pode lançar recursos AWS em uma rede virtual que você mesmo define e controla — com total controle sobre o ambiente de rede, incluindo seleção de intervalos de IP, criação de sub-redes, e configuração de tabelas de rotas e gateways.
+Amazon VPC is a logically isolated private virtual network within the AWS Cloud. It is your own section of the AWS Cloud where you can launch AWS resources in a virtual network that you define and control — with full control over the network environment, including IP range selection, subnet creation, and configuration of route tables and gateways.
 
-## Casos de uso
+## Use cases
 
-- Isolar recursos de produção em uma rede privada segura
-- Criar ambientes multi-camada (web, aplicação, banco de dados) com redes separadas
-- Conectar a rede corporativa on-premises à AWS via VPN ou Direct Connect
-- Segmentar ambientes (dev, homologação, produção) em VPCs separadas
-- Cumprir requisitos de conformidade que exigem isolamento de rede
+- Isolate production resources in a secure private network
+- Create multi-tier environments (web, application, database) with separate networks
+- Connect on-premises corporate network to AWS via VPN or Direct Connect
+- Segment environments (dev, staging, production) into separate VPCs
+- Meet compliance requirements that mandate network isolation
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- Cada conta AWS tem uma **VPC padrão** em cada região — pronta para uso imediato
-- Uma VPC abrange **toda uma região** — as sub-redes são criadas dentro das Zonas de Disponibilidade
-- **CIDR Block**: define o intervalo de endereços IP da VPC (ex: `10.0.0.0/16`)
-- **Componentes principais:**
-  - **Sub-redes (Subnets)**: segmentos da VPC dentro de uma AZ — podem ser públicas ou privadas
-  - **Internet Gateway (IGW)**: permite comunicação entre a VPC e a internet
-  - **Route Tables**: definem para onde o tráfego é direcionado
-  - **NAT Gateway**: permite que instâncias em sub-redes privadas acessem a internet (sem serem acessíveis de fora)
-  - **Security Groups**: firewall virtual no nível da instância (stateful)
-  - **Network ACLs**: firewall no nível da sub-rede (stateless)
-- **VPC Peering**: conecta duas VPCs para comunicação privada (mesmo entre contas e regiões)
-- **VPC Endpoints**: acesso privado a serviços AWS sem passar pela internet pública
+- Every AWS account has a **default VPC** in each region — ready for immediate use
+- A VPC spans an **entire region** — subnets are created within Availability Zones
+- **CIDR Block**: defines the IP address range of the VPC (e.g., `10.0.0.0/16`)
+- **Main components:**
+  - **Subnets**: segments of the VPC within an AZ — can be public or private
+  - **Internet Gateway (IGW)**: enables communication between the VPC and the internet
+  - **Route Tables**: define where traffic is directed
+  - **NAT Gateway**: allows instances in private subnets to access the internet (without being accessible from outside)
+  - **Security Groups**: virtual firewall at the instance level (stateful)
+  - **Network ACLs**: firewall at the subnet level (stateless)
+- **VPC Peering**: connects two VPCs for private communication (even across accounts and regions)
+- **VPC Endpoints**: private access to AWS services without going through the public internet
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma aplicação 3-tier (web, app, banco) é arquitetada em uma VPC com CIDR `10.0.0.0/16`. A camada web fica em sub-redes públicas (com Internet Gateway), a camada de aplicação em sub-redes privadas, e o banco de dados em sub-redes privadas isoladas. Instâncias nas sub-redes privadas usam um NAT Gateway para baixar atualizações da internet sem ficarem expostas. Security Groups restringem o acesso: o banco aceita conexões apenas da camada de aplicação.
+**Scenario:** A 3-tier application (web, app, database) is architected in a VPC with CIDR `10.0.0.0/16`. The web tier sits in public subnets (with Internet Gateway), the application tier in private subnets, and the database in isolated private subnets. Instances in private subnets use a NAT Gateway to download updates from the internet without being exposed. Security Groups restrict access: the database only accepts connections from the application tier.

@@ -1,28 +1,28 @@
 # Amazon ECR (Elastic Container Registry)
 
-## O que é?
+## What is it?
 
-Amazon ECR é um registro de contêineres Docker totalmente gerenciado que facilita o armazenamento, gerenciamento e deploy de imagens de contêiner. Elimina a necessidade de operar sua própria infraestrutura de registro ou preocupar-se com a escalabilidade do armazenamento de imagens.
+Amazon ECR is a fully managed Docker container registry that makes it easy to store, manage, and deploy container images. It eliminates the need to operate your own registry infrastructure or worry about the scalability of image storage.
 
-## Casos de uso
+## Use cases
 
-- Armazenar e versionar imagens Docker para deploy no ECS, EKS ou EC2
-- Pipeline de CI/CD: CodeBuild constrói a imagem e faz push para o ECR; CodeDeploy/ECS faz pull para o deploy
-- Compartilhar imagens de contêiner entre contas AWS de forma segura
-- Escaneamento de vulnerabilidades nas imagens antes do deploy
-- Armazenar imagens de base customizadas da empresa
+- Store and version Docker images for deployment on ECS, EKS, or EC2
+- CI/CD pipeline: CodeBuild builds the image and pushes it to ECR; CodeDeploy/ECS pulls it for deployment
+- Securely share container images between AWS accounts
+- Scan images for vulnerabilities before deployment
+- Store company-specific custom base images
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Repositórios**: contêineres de imagens — podem ser públicos (ECR Public Gallery) ou privados
-- **Integração nativa**: funciona perfeitamente com ECS, EKS, CodeBuild, CodeDeploy e outros serviços AWS
-- **Autenticação via IAM**: controle de acesso granular usando políticas IAM — sem credenciais separadas
-- **Image Scanning**: escaneamento automático de vulnerabilidades nas imagens usando o banco de dados CVE — identifica problemas de segurança antes do deploy
-- **Lifecycle Policies**: regras para deletar automaticamente imagens antigas (ex: manter apenas as 10 últimas versões) — controle de custos
-- **Imutabilidade de tags**: opção para impedir que uma tag seja sobrescrita (ex: garantir que `v1.0.0` sempre aponte para a mesma imagem)
-- **Replicação**: replica imagens automaticamente para múltiplas regiões — para deployments multi-região
-- **ECR Public Gallery**: repositório público para compartilhar imagens com qualquer pessoa (similar ao Docker Hub)
+- **Repositories**: containers for images — can be public (ECR Public Gallery) or private
+- **Native integration**: works seamlessly with ECS, EKS, CodeBuild, CodeDeploy, and other AWS services
+- **IAM authentication**: granular access control using IAM policies — no separate credentials needed
+- **Image Scanning**: automatic vulnerability scanning using the CVE database — identifies security issues before deployment
+- **Lifecycle Policies**: rules to automatically delete old images (e.g., keep only the last 10 versions) — cost control
+- **Tag immutability**: option to prevent a tag from being overwritten (e.g., ensuring `v1.0.0` always points to the same image)
+- **Replication**: automatically replicates images to multiple regions — for multi-region deployments
+- **ECR Public Gallery**: public repository for sharing images with anyone (similar to Docker Hub)
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um pipeline de CI/CD completo com ferramentas AWS: developer faz push para o CodeCommit → CodePipeline dispara → CodeBuild compila e constrói a imagem Docker → faz push para o ECR com a tag da versão (ex: `minha-app:v2.3.1`) → ECR escaneia a imagem e não encontra vulnerabilidades críticas → ECS faz pull da nova imagem do ECR e faz o deploy com rolling update. Tudo dentro da rede privada AWS — sem tráfego passando pela internet pública.
+**Scenario:** A complete CI/CD pipeline using AWS tools: a developer pushes to CodeCommit → CodePipeline triggers → CodeBuild compiles and builds the Docker image → pushes to ECR with the version tag (e.g., `my-app:v2.3.1`) → ECR scans the image and finds no critical vulnerabilities → ECS pulls the new image from ECR and deploys with a rolling update. Everything runs within the private AWS network — no traffic goes through the public internet.

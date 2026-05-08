@@ -1,26 +1,26 @@
-# Subnets (Sub-redes)
+# Subnets
 
-## O que é?
+## What is it?
 
-Subnets são segmentos de uma VPC que residem dentro de uma única Zona de Disponibilidade (AZ). Elas dividem o espaço de endereçamento IP da VPC em blocos menores e permitem organizar e isolar recursos por função, nível de acesso (público/privado) e segurança.
+Subnets are segments of a VPC that reside within a single Availability Zone (AZ). They divide the VPC's IP address space into smaller blocks and allow you to organize and isolate resources by function, access level (public/private), and security.
 
-## Casos de uso
+## Use cases
 
-- Separar recursos públicos (servidores web) de recursos privados (bancos de dados)
-- Isolar camadas de uma aplicação (web tier, app tier, data tier)
-- Distribuir recursos entre múltiplas AZs para alta disponibilidade
-- Criar redes dedicadas para serviços específicos (ex: sub-rede para RDS, outra para EC2)
+- Separate public resources (web servers) from private resources (databases)
+- Isolate layers of an application (web tier, app tier, data tier)
+- Distribute resources across multiple AZs for high availability
+- Create dedicated networks for specific services (e.g., a subnet for RDS, another for EC2)
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Sub-rede pública**: possui rota para um Internet Gateway — recursos podem ter IPs públicos e receber tráfego da internet
-- **Sub-rede privada**: sem rota direta para internet — recursos só são acessíveis de dentro da VPC ou via VPN
-- Cada sub-rede pertence a **exatamente uma AZ** — use múltiplas sub-redes em diferentes AZs para alta disponibilidade
-- **5 endereços IP são reservados** pela AWS em cada sub-rede (primeiro, segundo, terceiro, penúltimo e último)
-- **NAT Gateway**: colocado em sub-rede pública para permitir que instâncias em sub-redes privadas acessem a internet
-- **Bastion Host (Jump Box)**: instância EC2 em sub-rede pública usada para acessar instâncias em sub-redes privadas via SSH
-- A Route Table da sub-rede determina para onde o tráfego é direcionado (Internet Gateway, NAT Gateway, etc.)
+- **Public subnet**: has a route to an Internet Gateway — resources can have public IPs and receive traffic from the internet
+- **Private subnet**: no direct route to the internet — resources are only accessible from within the VPC or via VPN
+- Each subnet belongs to **exactly one AZ** — use multiple subnets in different AZs for high availability
+- **5 IP addresses are reserved** by AWS in each subnet (first, second, third, second-to-last, and last)
+- **NAT Gateway**: placed in a public subnet to allow instances in private subnets to access the internet
+- **Bastion Host (Jump Box)**: an EC2 instance in a public subnet used to SSH into instances in private subnets
+- The subnet's Route Table determines where traffic is directed (Internet Gateway, NAT Gateway, etc.)
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma aplicação bancária é implantada com alta disponibilidade em 2 AZs. Arquitetura: 2 sub-redes públicas (uma em cada AZ) com os servidores web e o Load Balancer; 2 sub-redes privadas (uma em cada AZ) com os servidores de aplicação; 2 sub-redes de banco de dados (uma em cada AZ) com as instâncias RDS. Se uma AZ falhar, a outra continua atendendo — garantindo disponibilidade mesmo em caso de falha de datacenter.
+**Scenario:** A banking application is deployed with high availability across 2 AZs. Architecture: 2 public subnets (one per AZ) with web servers and the Load Balancer; 2 private subnets (one per AZ) with application servers; 2 database subnets (one per AZ) with RDS instances. If one AZ fails, the other continues serving traffic — ensuring availability even in the event of a datacenter failure.

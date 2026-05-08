@@ -1,34 +1,34 @@
 # AWS Shield
 
-## O que é?
+## What is it?
 
-AWS Shield é um serviço gerenciado de proteção contra ataques DDoS (Distributed Denial of Service). Protege aplicações rodando na AWS contra ataques que tentam tornar serviços indisponíveis através de grandes volumes de tráfego malicioso.
+AWS Shield is a managed DDoS (Distributed Denial of Service) protection service. It protects applications running on AWS against attacks that attempt to make services unavailable through large volumes of malicious traffic.
 
-## Casos de uso
+## Use cases
 
-- Proteção de aplicações web de alta disponibilidade contra ataques DDoS
-- Proteção de infraestrutura crítica (bancos, governo, saúde)
-- Proteção automática de recursos AWS sem configuração adicional
-- Suporte especializado em DDoS 24/7 (Shield Advanced)
-- Conformidade com requisitos que exigem proteção ativa contra DDoS
+- Protecting high-availability web applications against DDoS attacks
+- Protecting critical infrastructure (banking, government, healthcare)
+- Automatic protection of AWS resources without additional configuration
+- Specialized 24/7 DDoS support (Shield Advanced)
+- Compliance with requirements that mandate active DDoS protection
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Dois níveis de proteção:**
+- **Two levels of protection:**
   - **AWS Shield Standard**:
-    - **Gratuito** e habilitado automaticamente para todos os clientes AWS
-    - Proteção contra ataques DDoS nas camadas 3 e 4 (rede e transporte)
-    - Mitiga ataques volumétricos como UDP floods e SYN floods
+    - **Free** and automatically enabled for all AWS customers
+    - Protection against DDoS attacks at Layers 3 and 4 (network and transport)
+    - Mitigates volumetric attacks such as UDP floods and SYN floods
   - **AWS Shield Advanced**:
-    - Pago (~$3.000/mês por organização)
-    - Proteção adicional contra ataques sofisticados de camada 7 (aplicação)
-    - Acesso ao **DRT (DDoS Response Team)** da AWS — suporte especializado 24/7
-    - **Proteção de custo**: reembolso de custos de scaling causados por ataque DDoS
-    - Diagnósticos avançados e relatórios de ataques
-    - Proteção para EC2, ELB, CloudFront, Route 53, AWS Global Accelerator
-- **Shield vs WAF**: Shield = DDoS (volumétrico, camadas 3/4); WAF = filtros de requisições HTTP maliciosas (camada 7)
-- Shield Advanced pode ser integrado com WAF para proteção combinada
+    - Paid (~$3,000/month per organization)
+    - Additional protection against sophisticated Layer 7 (application) attacks
+    - Access to the AWS **DRT (DDoS Response Team)** — specialized 24/7 support
+    - **Cost protection**: reimbursement of scaling costs caused by a DDoS attack
+    - Advanced diagnostics and attack reports
+    - Protection for EC2, ELB, CloudFront, Route 53, AWS Global Accelerator
+- **Shield vs WAF**: Shield = DDoS (volumetric, Layers 3/4); WAF = malicious HTTP request filtering (Layer 7)
+- Shield Advanced can be integrated with WAF for combined protection
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um portal de notícias fica offline durante um grande evento político devido a um ataque DDoS volumétrico. Após o incidente, o time migra para Shield Advanced: um ataque de 100 Gbps é automaticamente mitigado antes de chegar à infraestrutura. O time de segurança recebe notificações em tempo real sobre o ataque e pode acionar o DRT da AWS via chat se precisar de suporte especializado. Os custos extras de EC2 causados pelo ataque são reembolsados pela AWS — proteção financeira incluída.
+**Scenario:** A news portal goes offline during a major political event due to a volumetric DDoS attack. After the incident, the team migrates to Shield Advanced: a 100 Gbps attack is automatically mitigated before reaching the infrastructure. The security team receives real-time notifications about the attack and can engage the AWS DRT via chat if specialized support is needed. Extra EC2 costs caused by the attack are reimbursed by AWS — financial protection included.

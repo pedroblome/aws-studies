@@ -1,27 +1,27 @@
 # AWS Elastic Beanstalk
 
-## O que é?
+## What is it?
 
-AWS Elastic Beanstalk é um serviço de **PaaS (Platform as a Service)** que facilita o deploy e gerenciamento de aplicações web. Você faz upload do código e o Beanstalk cuida automaticamente do provisionamento de capacidade, balanceamento de carga, escalabilidade e monitoramento — sem necessidade de gerenciar a infraestrutura diretamente.
+AWS Elastic Beanstalk is a **PaaS (Platform as a Service)** that simplifies the deployment and management of web applications. You upload your code and Beanstalk automatically handles capacity provisioning, load balancing, scaling, and monitoring — without needing to manage the infrastructure directly.
 
-## Casos de uso
+## Use cases
 
-- Deploy rápido de aplicações web para times que não querem gerenciar infraestrutura
-- Ambientes de desenvolvimento e homologação ágeis
-- Migração de aplicações on-premises para a nuvem com mínimas mudanças
-- Startups que querem focar no produto, não na infra
-- Aplicações em linguagens como Java, .NET, PHP, Node.js, Python, Ruby, Go, Docker
+- Rapid deployment of web applications for teams that do not want to manage infrastructure
+- Agile development and staging environments
+- Migrating on-premises applications to the cloud with minimal changes
+- Startups focused on the product, not the infrastructure
+- Applications in languages such as Java, .NET, PHP, Node.js, Python, Ruby, Go, Docker
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **PaaS**: você gerencia apenas o código e as configurações da aplicação — a AWS gerencia o resto
-- O Beanstalk é **gratuito** — você paga apenas pelos recursos subjacentes que ele provisiona (EC2, RDS, ELB, etc.)
-- Suporta múltiplos ambientes (produção, staging) com deploys isolados
-- Mantém o **controle total** sobre os recursos — diferente de Lambda, você ainda pode acessar as instâncias EC2
-- Gerencia automaticamente: provisionamento de EC2, configuração do Load Balancer, Auto Scaling, monitoramento via CloudWatch
-- Ideal para **deploys rápidos** sem expertise em infraestrutura AWS
-- **Não recomendado** para arquiteturas muito customizadas — nesses casos, gerenciar EC2/ECS diretamente é melhor
+- **PaaS**: you manage only the code and application configuration — AWS manages the rest
+- Beanstalk itself is **free** — you pay only for the underlying resources it provisions (EC2, RDS, ELB, etc.)
+- Supports multiple environments (production, staging) with isolated deployments
+- Maintains **full control** over resources — unlike Lambda, you can still access the EC2 instances
+- Automatically manages: EC2 provisioning, Load Balancer configuration, Auto Scaling, monitoring via CloudWatch
+- Ideal for **quick deployments** without AWS infrastructure expertise
+- **Not recommended** for highly customized architectures — in those cases, managing EC2/ECS directly is better
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma agência de desenvolvimento precisa entregar rapidamente uma aplicação Node.js para um cliente. Usando o Elastic Beanstalk, o dev faz upload do código via CLI (`eb deploy`). O Beanstalk cria automaticamente as instâncias EC2, configura o Nginx, habilita o Auto Scaling e o Load Balancer, e disponibiliza a aplicação em uma URL pública — tudo em menos de 10 minutos, sem que o desenvolvedor precise conhecer os detalhes da infraestrutura AWS.
+**Scenario:** A development agency needs to quickly deliver a Node.js application to a client. Using Elastic Beanstalk, the developer uploads the code via CLI (`eb deploy`). Beanstalk automatically creates EC2 instances, configures Nginx, enables Auto Scaling and the Load Balancer, and makes the application available at a public URL — all in less than 10 minutes, without the developer needing to know AWS infrastructure details.

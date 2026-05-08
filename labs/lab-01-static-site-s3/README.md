@@ -1,39 +1,39 @@
-# Lab 01 — Site Estático com Amazon S3
+# Lab 01 — Static Website with Amazon S3
 
-## O que é?
+## What is it?
 
-Neste laboratório, você aprenderá a hospedar um site estático (HTML, CSS, JavaScript) usando o Amazon S3, configurar acesso público, habilitar o recurso de hospedagem de site estático e distribuir o conteúdo globalmente com o Amazon CloudFront. É um dos casos de uso mais simples e econômicos para hospedar sites na AWS.
+In this lab, you will learn how to host a static website (HTML, CSS, JavaScript) using Amazon S3, configure public access, enable the static website hosting feature, and distribute the content globally with Amazon CloudFront. This is one of the simplest and most cost-effective use cases for hosting websites on AWS.
 
-## Casos de uso
+## Use cases
 
-- Portfólios pessoais e sites de apresentação
-- Documentação de projetos (como este repositório)
-- Landing pages e sites institucionais
-- Aplicações frontend (React, Vue, Angular) com APIs separadas
-- Sites com alto tráfego a baixo custo (S3 é muito mais barato que um servidor)
+- Personal portfolios and presentation websites
+- Project documentation (like this repository)
+- Landing pages and institutional websites
+- Frontend applications (React, Vue, Angular) with separate APIs
+- High-traffic sites at low cost (S3 is much cheaper than a server)
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- O S3 pode hospedar sites estáticos nativamente — sem servidor necessário
-- O site é acessível via URL do S3: `http://bucket-name.s3-website-region.amazonaws.com`
-- Para usar domínio customizado (ex: `www.meusite.com`), combine com **Route 53** e **CloudFront**
-- **CloudFront** adiciona HTTPS (obrigatório em domínios customizados) e cache global
-- **ACM (AWS Certificate Manager)**: certificado SSL/TLS gratuito para uso com CloudFront
-- O bucket precisa ter **Block Public Access desabilitado** e uma **Bucket Policy** que permite acesso público (`s3:GetObject`)
-- Arquivos estáticos = HTML, CSS, JS, imagens — sem processamento no servidor
-- **Custo muito baixo**: pague apenas pelo armazenamento (GB) e transferência de dados
+- S3 can natively host static websites — no server required
+- The site is accessible via S3 URL: `http://bucket-name.s3-website-region.amazonaws.com`
+- To use a custom domain (e.g., `www.mysite.com`), combine with **Route 53** and **CloudFront**
+- **CloudFront** adds HTTPS (required for custom domains) and global caching
+- **ACM (AWS Certificate Manager)**: free SSL/TLS certificate for use with CloudFront
+- The bucket must have **Block Public Access disabled** and a **Bucket Policy** that allows public access (`s3:GetObject`)
+- Static files = HTML, CSS, JS, images — no server-side processing
+- **Very low cost**: pay only for storage (GB) and data transfer
 
-## Exemplo prático
+## Practical example
 
-**Cenário conceitual — Passo a Passo:**
+**Conceptual scenario — Step by Step:**
 
-1. **Criar o bucket S3**: nome igual ao domínio (ex: `www.meusite.com`) na região desejada
-2. **Fazer upload dos arquivos**: `index.html`, `style.css`, imagens e outros assets
-3. **Habilitar Static Website Hosting**: definir `index.html` como documento padrão e `error.html` como página de erro
-4. **Configurar acesso público**: desabilitar Block Public Access e criar Bucket Policy permitindo `s3:GetObject` para `*`
-5. **Criar distribuição CloudFront**: apontando para o endpoint do S3, habilitando HTTPS com certificado ACM
-6. **Configurar Route 53**: criar registro CNAME ou Alias apontando `www.meusite.com` para a distribuição CloudFront
+1. **Create the S3 bucket**: name matching the domain (e.g., `www.mysite.com`) in the desired region
+2. **Upload files**: `index.html`, `style.css`, images, and other assets
+3. **Enable Static Website Hosting**: set `index.html` as the default document and `error.html` as the error page
+4. **Configure public access**: disable Block Public Access and create a Bucket Policy allowing `s3:GetObject` for `*`
+5. **Create a CloudFront distribution**: pointing to the S3 endpoint, enabling HTTPS with an ACM certificate
+6. **Configure Route 53**: create a CNAME or Alias record pointing `www.mysite.com` to the CloudFront distribution
 
-**Resultado**: site acessível globalmente via HTTPS em `https://www.meusite.com`, com conteúdo cacheado nas edge locations do CloudFront em mais de 400 locais ao redor do mundo — com latência de milissegundos para usuários em qualquer país.
+**Result**: site accessible globally via HTTPS at `https://www.mysite.com`, with content cached at CloudFront edge locations in over 400 locations around the world — with millisecond latency for users in any country.
 
-**Custo estimado**: para um site simples com 10 GB de dados e 100 mil visitas/mês, o custo total (S3 + CloudFront) é inferior a $5/mês.
+**Estimated cost**: for a simple site with 10 GB of data and 100,000 visits/month, the total cost (S3 + CloudFront) is under $5/month.

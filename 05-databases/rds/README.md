@@ -1,28 +1,28 @@
 # Amazon RDS (Relational Database Service)
 
-## O que é?
+## What is it?
 
-Amazon RDS é um serviço de banco de dados relacional gerenciado que facilita a configuração, operação e escalabilidade de bancos de dados na nuvem. A AWS gerencia tarefas administrativas como provisionamento de hardware, instalação do banco, patches, backups e recuperação — você foca na sua aplicação.
+Amazon RDS is a managed relational database service that makes it easy to set up, operate, and scale databases in the cloud. AWS handles administrative tasks such as hardware provisioning, database installation, patching, backups, and recovery — you focus on your application.
 
-## Casos de uso
+## Use cases
 
-- Bancos de dados para aplicações web e mobile (e-commerce, SaaS, CRMs)
-- Migração de bancos de dados on-premises para a nuvem
-- Aplicações que requerem transações ACID e joins complexos
-- Sistemas financeiros e contábeis com dados relacionais
-- Backends de aplicações que usam ORM (Hibernate, ActiveRecord, etc.)
+- Databases for web and mobile applications (e-commerce, SaaS, CRMs)
+- Migrating on-premises databases to the cloud
+- Applications requiring ACID transactions and complex joins
+- Financial and accounting systems with relational data
+- Application backends using ORMs (Hibernate, ActiveRecord, etc.)
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Bancos suportados**: MySQL, PostgreSQL, MariaDB, Oracle, Microsoft SQL Server, e Amazon Aurora
-- **Multi-AZ**: replica os dados sincronamente para uma instância standby em outra AZ — failover automático em caso de falha (alta disponibilidade)
-- **Read Replicas**: cópias assíncronas do banco para distribuir carga de leitura — melhoram a performance (não são para failover)
-- **Backups automáticos**: retenção de 1 a 35 dias, com restauração para qualquer ponto no tempo (PITR)
-- **Gerenciado pela AWS**: patches do SO e do banco, backups, monitoramento — você não tem acesso SSH à instância
-- **RDS é diferente do DynamoDB**: RDS = relacional (SQL); DynamoDB = NoSQL (chave-valor/documento)
-- **Encryption at rest**: suporte a criptografia com KMS — deve ser habilitada na criação
-- **Security Groups** controlam o acesso à instância RDS
+- **Supported databases**: MySQL, PostgreSQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora
+- **Multi-AZ**: synchronously replicates data to a standby instance in another AZ — automatic failover in the event of a failure (high availability)
+- **Read Replicas**: asynchronous copies of the database to distribute read load — improve performance (not for failover)
+- **Automatic backups**: retention from 1 to 35 days, with point-in-time restore (PITR)
+- **Managed by AWS**: OS and database patching, backups, monitoring — you do not have SSH access to the instance
+- **RDS differs from DynamoDB**: RDS = relational (SQL); DynamoDB = NoSQL (key-value/document)
+- **Encryption at rest**: KMS encryption support — must be enabled at creation time
+- **Security Groups** control access to the RDS instance
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma startup tem um banco de dados MySQL em um servidor dedicado que requer manutenção constante. Ao migrar para o Amazon RDS for MySQL com Multi-AZ, a AWS passa a gerenciar backups diários, aplicar patches de segurança automaticamente e fazer failover em menos de 2 minutos se a instância principal falhar. O time de dev para de se preocupar com DBA e foca no produto. Read Replicas são adicionadas para os relatórios pesados, sem impactar a performance da produção.
+**Scenario:** A startup has a MySQL database on a dedicated server requiring constant maintenance. By migrating to Amazon RDS for MySQL with Multi-AZ, AWS takes over daily backups, automatically applies security patches, and performs failover in under 2 minutes if the primary instance fails. The dev team stops worrying about DBA tasks and focuses on the product. Read Replicas are added for heavy reporting queries without impacting production performance.

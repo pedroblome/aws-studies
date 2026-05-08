@@ -1,29 +1,29 @@
 # AWS CodeDeploy
 
-## O que é?
+## What is it?
 
-AWS CodeDeploy é um serviço de deploy totalmente gerenciado que automatiza deployments de aplicações em instâncias EC2, servidores on-premises, funções Lambda e serviços ECS. Minimiza o downtime durante os deployments e elimina erros manuais do processo de deploy.
+AWS CodeDeploy is a fully managed deployment service that automates application deployments to EC2 instances, on-premises servers, Lambda functions, and ECS services. It minimizes downtime during deployments and eliminates manual deployment errors.
 
-## Casos de uso
+## Use cases
 
-- Deploy automatizado de aplicações em instâncias EC2 com zero downtime
-- Atualização de funções Lambda com validação automática
-- Deploy de microsserviços em ECS com blue/green deployment
-- Deploy em servidores on-premises como parte de uma estratégia híbrida
-- Rollback automático em caso de falha durante o deploy
+- Automated application deployments to EC2 instances with zero downtime
+- Lambda function updates with automatic validation
+- Microservice deployments to ECS with blue/green deployment
+- Deploying to on-premises servers as part of a hybrid strategy
+- Automatic rollback in case of deployment failure
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Estratégias de deploy:**
-  - **In-Place (Rolling)**: instâncias são atualizadas uma a uma ou em grupos — o mesmo ambiente, downtime mínimo
-  - **Blue/Green**: novo ambiente (green) é criado com a nova versão; após validação, o tráfego é redirecionado do ambiente antigo (blue) para o novo — sem downtime
-- **AppSpec file (appspec.yml)**: arquivo de configuração que define como o CodeDeploy deve fazer o deploy — hooks de ciclo de vida (BeforeInstall, AfterInstall, ApplicationStart, ValidateService)
-- **Deployment Groups**: define quais instâncias/ambientes receberão o deploy (via tags EC2 ou Auto Scaling Groups)
-- **Rollback automático**: se os health checks falharem ou alarmes CloudWatch dispararem, o CodeDeploy reverte automaticamente
-- **Agente CodeDeploy**: software instalado nas instâncias EC2/on-premises que executa os comandos de deploy
-- **Não precisa de agente** para Lambda e ECS
-- **Hooks de ciclo de vida**: permitem executar scripts personalizados em cada fase do deploy (ex: parar o serviço, fazer backup, iniciar)
+- **Deployment strategies:**
+  - **In-Place (Rolling)**: instances are updated one at a time or in groups — same environment, minimal downtime
+  - **Blue/Green**: a new environment (green) is created with the new version; after validation, traffic is redirected from the old environment (blue) to the new one — no downtime
+- **AppSpec file (appspec.yml)**: configuration file that defines how CodeDeploy should deploy — lifecycle hooks (BeforeInstall, AfterInstall, ApplicationStart, ValidateService)
+- **Deployment Groups**: defines which instances/environments receive the deployment (via EC2 tags or Auto Scaling Groups)
+- **Automatic rollback**: if health checks fail or CloudWatch alarms trigger, CodeDeploy automatically reverts
+- **CodeDeploy Agent**: software installed on EC2/on-premises instances that executes the deployment commands
+- **No agent required** for Lambda and ECS
+- **Lifecycle hooks**: allow running custom scripts at each deployment phase (e.g., stop the service, take a backup, start)
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um time usa Blue/Green deployment para uma API crítica no EC2. O CodeDeploy cria automaticamente um novo Auto Scaling Group (green) com a nova versão da aplicação. Testes de health check validam que a nova versão responde corretamente. O Load Balancer é reconfigurado para direcionar 100% do tráfego para o ambiente green. Se um alarme CloudWatch detectar erros 500 acima do normal nos primeiros 10 minutos, o rollback automático redireciona o tráfego de volta para o ambiente blue em segundos — SEM downtime para os usuários.
+**Scenario:** A team uses Blue/Green deployment for a critical API on EC2. CodeDeploy automatically creates a new Auto Scaling Group (green) with the new version of the application. Health check tests validate that the new version responds correctly. The Load Balancer is reconfigured to direct 100% of traffic to the green environment. If a CloudWatch alarm detects 500 errors above normal in the first 10 minutes, automatic rollback redirects traffic back to the blue environment in seconds — with NO downtime for users.

@@ -1,32 +1,32 @@
 # Amazon Route 53
 
-## O que é?
+## What is it?
 
-Amazon Route 53 é o serviço de DNS (Domain Name System) gerenciado e escalável da AWS. Traduz nomes de domínio legíveis por humanos (como `www.minhaempresa.com`) em endereços IP. Além do DNS, oferece registro de domínios e verificações de integridade (health checks) dos endpoints.
+Amazon Route 53 is AWS's managed, scalable DNS (Domain Name System) service. It translates human-readable domain names (such as `www.mycompany.com`) into IP addresses. In addition to DNS, it offers domain registration and endpoint health checks.
 
-## Casos de uso
+## Use cases
 
-- Registrar domínios e gerenciar DNS para aplicações hospedadas na AWS
-- Roteamento inteligente de tráfego com base em latência, geolocalização ou peso
-- Failover automático — redirecionar tráfego para um endpoint de backup se o principal falhar
-- Integração com outros serviços AWS (ELB, CloudFront, S3 static websites)
-- DNS privado para recursos dentro de uma VPC
+- Register domains and manage DNS for applications hosted on AWS
+- Intelligent traffic routing based on latency, geolocation, or weight
+- Automatic failover — redirect traffic to a backup endpoint if the primary fails
+- Integration with other AWS services (ELB, CloudFront, S3 static websites)
+- Private DNS for resources within a VPC
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Altamente disponível e escalável** — projetado com 100% de SLA de disponibilidade
-- **Políticas de roteamento:**
-  - **Simple**: roteamento básico para um único recurso
-  - **Weighted**: distribui tráfego entre recursos com pesos (ex: 70% para v1, 30% para v2 — útil para blue/green deploy)
-  - **Latency-based**: direciona usuários para a região com menor latência
-  - **Failover**: redireciona para backup se o primário falhar (com health checks)
-  - **Geolocation**: roteia com base na localização geográfica do usuário
-  - **Geoproximity**: roteia com base na proximidade geográfica (com viés configurável)
-  - **Multivalue Answer**: retorna múltiplos IPs e remove os não saudáveis
-- **Health Checks**: monitoram a disponibilidade dos endpoints e acionam failover
-- **Hosted Zones**: contêineres de registros DNS para um domínio específico (pública ou privada)
-- O nome "Route 53" vem da porta 53, a porta padrão do protocolo DNS
+- **Highly available and scalable** — designed with a 100% availability SLA
+- **Routing policies:**
+  - **Simple**: basic routing to a single resource
+  - **Weighted**: distributes traffic between resources with weights (e.g., 70% to v1, 30% to v2 — useful for blue/green deploy)
+  - **Latency-based**: directs users to the region with the lowest latency
+  - **Failover**: redirects to backup if the primary fails (with health checks)
+  - **Geolocation**: routes based on the user's geographic location
+  - **Geoproximity**: routes based on geographic proximity (with configurable bias)
+  - **Multivalue Answer**: returns multiple IPs and removes unhealthy ones
+- **Health Checks**: monitor endpoint availability and trigger failover
+- **Hosted Zones**: containers of DNS records for a specific domain (public or private)
+- The name "Route 53" comes from port 53, the default port for the DNS protocol
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma empresa global tem servidores nas regiões us-east-1, eu-west-1 e ap-southeast-1. O Route 53 usa roteamento por latência: usuários da América são direcionados para us-east-1, europeus para eu-west-1 e asiáticos para ap-southeast-1 — cada um recebe resposta do servidor mais próximo. Se o servidor de us-east-1 falhar, os health checks detectam a falha em segundos e o Route 53 automaticamente redireciona o tráfego americano para eu-west-1.
+**Scenario:** A global company has servers in regions us-east-1, eu-west-1, and ap-southeast-1. Route 53 uses latency-based routing: users from the Americas are directed to us-east-1, Europeans to eu-west-1, and Asians to ap-southeast-1 — each receives a response from the closest server. If the us-east-1 server fails, health checks detect the failure within seconds and Route 53 automatically redirects American traffic to eu-west-1.

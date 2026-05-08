@@ -1,45 +1,45 @@
 # AWS Well-Architected Framework
 
-## O que é?
+## What is it?
 
-O AWS Well-Architected Framework é um conjunto de melhores práticas e princípios de design criado pela AWS para ajudar arquitetos de nuvem a construir infraestruturas seguras, de alta performance, resilientes e eficientes. Baseia-se em seis pilares fundamentais que guiam as decisões de arquitetura.
+The AWS Well-Architected Framework is a set of best practices and design principles created by AWS to help cloud architects build secure, high-performance, resilient, and efficient infrastructure. It is based on six fundamental pillars that guide architectural decisions.
 
-## Casos de uso
+## Use cases
 
-- Avaliação de arquiteturas existentes para identificar riscos e oportunidades de melhoria
-- Guia para arquitetar novas aplicações na nuvem desde o início
-- Revisão periódica da infraestrutura (Well-Architected Review)
-- Preparação para auditorias de conformidade e segurança
-- Alinhamento com as melhores práticas da indústria
+- Evaluating existing architectures to identify risks and improvement opportunities
+- Guide for architecting new cloud applications from the start
+- Periodic infrastructure review (Well-Architected Review)
+- Preparation for compliance and security audits
+- Alignment with industry best practices
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-**Os 6 Pilares do Well-Architected Framework:**
+**The 6 Pillars of the Well-Architected Framework:**
 
-1. **Excelência Operacional (Operational Excellence)**
-   - Executar e monitorar sistemas, melhorar processos e procedimentos continuamente
-   - Princípios: infraestrutura como código, mudanças frequentes e pequenas, antecipar falhas
+1. **Operational Excellence**
+   - Run and monitor systems, continuously improve processes and procedures
+   - Principles: infrastructure as code, small and frequent changes, anticipate failures
 
-2. **Segurança (Security)**
-   - Proteger dados, sistemas e ativos
-   - Princípios: identidade forte, rastreabilidade, segurança em todas as camadas, criptografia, preparação para incidentes
+2. **Security**
+   - Protect data, systems, and assets
+   - Principles: strong identity, traceability, security at all layers, encryption, incident preparedness
 
-3. **Confiabilidade (Reliability)**
-   - Capacidade de recuperar de falhas e atender à demanda
-   - Princípios: recuperação automática, testar recuperação, escala horizontal, parar de adivinhar capacidade
+3. **Reliability**
+   - Ability to recover from failures and meet demand
+   - Principles: automatic recovery, test recovery procedures, scale horizontally, stop guessing capacity
 
-4. **Eficiência de Performance (Performance Efficiency)**
-   - Usar recursos computacionais eficientemente
-   - Princípios: democratizar tecnologias avançadas, ir global em minutos, arquiteturas serverless, experimentar com frequência
+4. **Performance Efficiency**
+   - Use computing resources efficiently
+   - Principles: democratize advanced technologies, go global in minutes, serverless architectures, experiment frequently
 
-5. **Otimização de Custos (Cost Optimization)**
-   - Evitar gastos desnecessários
-   - Princípios: modelo de consumo, medir eficiência, parar de gastar com data center, analisar e atribuir gastos
+5. **Cost Optimization**
+   - Avoid unnecessary spending
+   - Principles: consumption-based model, measure efficiency, stop spending on data centers, analyze and attribute expenditures
 
-6. **Sustentabilidade (Sustainability)** *(adicionado em 2021)*
-   - Minimizar o impacto ambiental
-   - Princípios: entender seu impacto, maximizar utilização, usar serviços gerenciados, reduzir recursos downstream
+6. **Sustainability** *(added in 2021)*
+   - Minimize environmental impact
+   - Principles: understand your impact, maximize utilization, use managed services, reduce downstream resources
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Uma empresa faz uma Well-Architected Review em sua aplicação de e-commerce e identifica riscos: (1) Segurança — banco de dados RDS em sub-rede pública (risco alto); (2) Confiabilidade — sem Multi-AZ nem backups automáticos; (3) Otimização de Custos — instâncias EC2 superprovisionadas com 5% de uso de CPU. O plano de ação move o RDS para sub-rede privada, habilita Multi-AZ, ativa backups automáticos e reduz o tamanho das instâncias — melhorando a arquitetura em todos os pilares.
+**Scenario:** A company conducts a Well-Architected Review on its e-commerce application and identifies risks: (1) Security — RDS database in a public subnet (high risk); (2) Reliability — no Multi-AZ or automatic backups; (3) Cost Optimization — over-provisioned EC2 instances running at 5% CPU usage. The action plan moves RDS to a private subnet, enables Multi-AZ, activates automatic backups, and downsizes the instances — improving the architecture across all pillars.

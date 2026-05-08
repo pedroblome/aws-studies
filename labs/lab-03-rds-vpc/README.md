@@ -1,45 +1,45 @@
-# Lab 03 — Banco de Dados RDS em VPC Privada
+# Lab 03 — RDS Database in a Private VPC
 
-## O que é?
+## What is it?
 
-Neste laboratório, você aprenderá a implantar um banco de dados Amazon RDS em uma VPC com arquitetura de sub-redes correta — o banco de dados em sub-rede privada (sem acesso direto à internet) e a aplicação em sub-rede pública ou privada. Esta é a configuração de segurança recomendada para bancos de dados em produção.
+In this lab, you will learn how to deploy an Amazon RDS database in a VPC with the correct subnet architecture — the database in a private subnet (no direct internet access) and the application in a public or private subnet. This is the recommended security configuration for production databases.
 
-## Casos de uso
+## Use cases
 
-- Bancos de dados de aplicações web em produção
-- Sistemas que precisam de separação entre camada de aplicação e dados
-- Ambientes que exigem conformidade de segurança (PCI DSS, LGPD)
-- Qualquer aplicação com dados sensíveis que requerem isolamento de rede
+- Web application databases in production
+- Systems that need separation between the application and data layers
+- Environments requiring security compliance (PCI DSS, GDPR)
+- Any application with sensitive data requiring network isolation
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Nunca coloque um banco de dados em sub-rede pública** — é uma falha grave de segurança
-- **DB Subnet Group**: requisito do RDS — define em quais sub-redes o banco pode ser criado (mínimo 2 AZs para Multi-AZ)
-- **Security Group do RDS**: aceita conexões apenas do Security Group da camada de aplicação — na porta do banco (3306 para MySQL, 5432 para PostgreSQL)
-- **Multi-AZ**: cria uma réplica standby em outra AZ para failover automático — recomendado para produção
-- **Backups automáticos**: habilitados por padrão, retenção de 7 dias — configurável até 35 dias
-- **Acesso via Bastion Host**: para acessar o banco via linha de comando, use um Bastion Host em sub-rede pública como intermediário
-- **Parameter Groups**: configurações do banco de dados gerenciadas pela AWS — sem acesso ao SO da instância
-- **Encryption at rest**: habilite na criação usando KMS — não pode ser habilitado depois sem recriar o banco
+- **Never place a database in a public subnet** — this is a serious security flaw
+- **DB Subnet Group**: required by RDS — defines which subnets the database can be created in (minimum 2 AZs for Multi-AZ)
+- **RDS Security Group**: accepts connections only from the application layer's Security Group — on the database port (3306 for MySQL, 5432 for PostgreSQL)
+- **Multi-AZ**: creates a standby replica in another AZ for automatic failover — recommended for production
+- **Automatic backups**: enabled by default, 7-day retention — configurable up to 35 days
+- **Access via Bastion Host**: to access the database via command line, use a Bastion Host in a public subnet as an intermediary
+- **Parameter Groups**: database configurations managed by AWS — no OS-level access to the instance
+- **Encryption at rest**: enable at creation time using KMS — cannot be enabled afterwards without recreating the database
 
-## Exemplo prático
+## Practical example
 
-**Cenário conceitual — Arquitetura Completa:**
+**Conceptual scenario — Complete Architecture:**
 
-**Estrutura da VPC (CIDR: 10.0.0.0/16):**
-- Sub-rede pública AZ-A: `10.0.1.0/24` → Bastion Host + NAT Gateway
-- Sub-rede pública AZ-B: `10.0.2.0/24` → (backup do NAT Gateway)
-- Sub-rede privada App AZ-A: `10.0.11.0/24` → Instâncias EC2 da aplicação
-- Sub-rede privada App AZ-B: `10.0.12.0/24` → Instâncias EC2 da aplicação
-- Sub-rede privada DB AZ-A: `10.0.21.0/24` → RDS Primary
-- Sub-rede privada DB AZ-B: `10.0.22.0/24` → RDS Standby (Multi-AZ)
+**VPC structure (CIDR: 10.0.0.0/16):**
+- Public subnet AZ-A: `10.0.1.0/24` → Bastion Host + NAT Gateway
+- Public subnet AZ-B: `10.0.2.0/24` → (NAT Gateway backup)
+- Private App subnet AZ-A: `10.0.11.0/24` → EC2 application instances
+- Private App subnet AZ-B: `10.0.12.0/24` → EC2 application instances
+- Private DB subnet AZ-A: `10.0.21.0/24` → RDS Primary
+- Private DB subnet AZ-B: `10.0.22.0/24` → RDS Standby (Multi-AZ)
 
 **Security Groups:**
-- `sg-bastion`: aceita SSH (porta 22) apenas do IP do escritório
-- `sg-app`: aceita HTTP (porta 8080) do Load Balancer; pode acessar `sg-db`
-- `sg-db`: aceita MySQL (porta 3306) APENAS de `sg-app` — completamente isolado da internet
+- `sg-bastion`: accepts SSH (port 22) only from the office IP
+- `sg-app`: accepts HTTP (port 8080) from the Load Balancer; can access `sg-db`
+- `sg-db`: accepts MySQL (port 3306) ONLY from `sg-app` — completely isolated from the internet
 
-**Fluxo de acesso:**
-- Usuário → Internet Gateway → Load Balancer → EC2 (sg-app) → RDS (sg-db)
-- DBA → Bastion Host (SSH) → EC2 → RDS (para manutenção)
-- O banco de dados JAMAIS é acessível diretamente pela internet — máxima segurança.
+**Access flow:**
+- User → Internet Gateway → Load Balancer → EC2 (sg-app) → RDS (sg-db)
+- DBA → Bastion Host (SSH) → EC2 → RDS (for maintenance)
+- The database is NEVER directly accessible from the internet — maximum security.

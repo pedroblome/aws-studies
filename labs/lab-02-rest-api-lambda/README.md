@@ -1,46 +1,46 @@
-# Lab 02 — API REST Serverless com Lambda e API Gateway
+# Lab 02 — Serverless REST API with Lambda and API Gateway
 
-## O que é?
+## What is it?
 
-Neste laboratório, você aprenderá a construir uma API REST completamente serverless usando Amazon API Gateway como frontend HTTP e AWS Lambda como backend de processamento, com dados armazenados no DynamoDB. Esta é a arquitetura serverless mais comum e amplamente usada na AWS.
+In this lab, you will learn how to build a completely serverless REST API using Amazon API Gateway as the HTTP frontend and AWS Lambda as the processing backend, with data stored in DynamoDB. This is the most common and widely used serverless architecture on AWS.
 
-## Casos de uso
+## Use cases
 
-- Backends para aplicativos mobile e web
-- Microsserviços serverless
-- APIs de integração entre sistemas
-- Processamento de webhooks
-- APIs com tráfego variável (pague apenas pelo uso)
+- Backends for mobile and web applications
+- Serverless microservices
+- Integration APIs between systems
+- Webhook processing
+- APIs with variable traffic (pay only for usage)
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **API Gateway + Lambda**: a combinação padrão para APIs serverless na AWS
-- **API Gateway**: gerencia autenticação, throttling, caching, documentação e roteamento de requisições
-- **Lambda**: processa as requisições sem servidor — escala de 0 a milhares de invocações simultâneas
-- **DynamoDB**: banco NoSQL serverless — complemento natural ao Lambda para armazenar dados
-- **Sem servidor para gerenciar**: toda a infraestrutura é gerenciada pela AWS
-- **Pay-per-use**: pague por requisição no API Gateway e por milissegundo de execução no Lambda
-- **IAM + API Keys + Cognito**: opções para autenticar e autorizar chamadas à API
-- **CORS**: deve ser habilitado no API Gateway para chamadas de browsers
-- **Stages**: ambientes de deploy no API Gateway (dev, staging, prod) com URLs separadas
+- **API Gateway + Lambda**: the standard combination for serverless APIs on AWS
+- **API Gateway**: manages authentication, throttling, caching, documentation, and request routing
+- **Lambda**: processes requests without a server — scales from 0 to thousands of concurrent invocations
+- **DynamoDB**: serverless NoSQL database — a natural complement to Lambda for storing data
+- **No servers to manage**: all infrastructure is managed by AWS
+- **Pay-per-use**: pay per request on API Gateway and per millisecond of execution on Lambda
+- **IAM + API Keys + Cognito**: options for authenticating and authorizing API calls
+- **CORS**: must be enabled on API Gateway for browser-based calls
+- **Stages**: deployment environments in API Gateway (dev, staging, prod) with separate URLs
 
-## Exemplo prático
+## Practical example
 
-**Cenário conceitual — API de Tarefas (To-Do List):**
+**Conceptual scenario — To-Do List API:**
 
-**Endpoints da API:**
-- `POST /tasks` → Lambda cria nova tarefa no DynamoDB
-- `GET /tasks` → Lambda lista todas as tarefas do DynamoDB
-- `GET /tasks/{id}` → Lambda busca tarefa por ID
-- `PUT /tasks/{id}` → Lambda atualiza tarefa
-- `DELETE /tasks/{id}` → Lambda deleta tarefa
+**API endpoints:**
+- `POST /tasks` → Lambda creates a new task in DynamoDB
+- `GET /tasks` → Lambda lists all tasks from DynamoDB
+- `GET /tasks/{id}` → Lambda fetches a task by ID
+- `PUT /tasks/{id}` → Lambda updates a task
+- `DELETE /tasks/{id}` → Lambda deletes a task
 
-**Fluxo de uma requisição:**
-1. App mobile envia `POST /tasks` com `{"title": "Estudar AWS"}` para o API Gateway
-2. API Gateway autentica a requisição via API Key e valida o JSON
-3. API Gateway invoca a função Lambda `CreateTask`
-4. Lambda recebe o evento, gera um UUID, salva `{"id": "abc123", "title": "Estudar AWS", "done": false}` no DynamoDB
-5. Lambda retorna `{"statusCode": 201, "body": {"id": "abc123"}}`
-6. API Gateway retorna a resposta ao app com status HTTP 201
+**Request flow:**
+1. Mobile app sends `POST /tasks` with `{"title": "Study AWS"}` to API Gateway
+2. API Gateway authenticates the request via API Key and validates the JSON
+3. API Gateway invokes the Lambda function `CreateTask`
+4. Lambda receives the event, generates a UUID, saves `{"id": "abc123", "title": "Study AWS", "done": false}` to DynamoDB
+5. Lambda returns `{"statusCode": 201, "body": {"id": "abc123"}}`
+6. API Gateway returns the response to the app with HTTP status 201
 
-**Custo para 1 milhão de requisições/mês**: aproximadamente $3.50 (API Gateway) + $0.20 (Lambda) + custo mínimo do DynamoDB = menos de $5/mês total, com **zero** servidores para gerenciar.
+**Cost for 1 million requests/month**: approximately $3.50 (API Gateway) + $0.20 (Lambda) + minimal DynamoDB cost = less than $5/month total, with **zero** servers to manage.

@@ -1,34 +1,34 @@
 # Amazon CloudWatch
 
-## O que é?
+## What is it?
 
-Amazon CloudWatch é o serviço de monitoramento e observabilidade da AWS. Coleta e rastreia métricas, coleta e monitora arquivos de log, define alarmes e automaticamente reage a mudanças nos recursos AWS. É a ferramenta central de observabilidade para aplicações e infraestrutura na AWS.
+Amazon CloudWatch is AWS's monitoring and observability service. It collects and tracks metrics, collects and monitors log files, sets alarms, and automatically reacts to changes in AWS resources. It is the central observability tool for applications and infrastructure on AWS.
 
-## Casos de uso
+## Use cases
 
-- Monitorar utilização de CPU, memória e disco de instâncias EC2
-- Criar alarmes que enviam notificações (via SNS) quando métricas ultrapassam limites
-- Centralizar e analisar logs de aplicações e serviços AWS
-- Acionar ações automáticas (Auto Scaling, Lambda) baseadas em métricas
-- Criar dashboards para visualização em tempo real da saúde do sistema
-- Monitorar custos e uso dos serviços AWS
+- Monitor CPU, memory, and disk utilization of EC2 instances
+- Create alarms that send notifications (via SNS) when metrics exceed thresholds
+- Centralize and analyze logs from applications and AWS services
+- Trigger automatic actions (Auto Scaling, Lambda) based on metrics
+- Create dashboards for real-time visualization of system health
+- Monitor costs and usage of AWS services
 
-## Pontos-chave para a prova (CLF-C02)
+## Key points for the exam (CLF-C02)
 
-- **Métricas**: dados numéricos coletados ao longo do tempo (CPU, NetworkIn, RequestCount, etc.)
-  - Métricas padrão do EC2: CPU, rede, disco — a cada 5 minutos
-  - **Detailed Monitoring**: métricas a cada 1 minuto (custo adicional)
-  - **Custom Metrics**: suas próprias métricas (ex: usuários ativos, tamanho de fila)
-- **Logs**: o CloudWatch Logs centraliza logs de aplicações, Lambda, RDS, VPC Flow Logs, etc.
-  - **Log Groups**: contêineres para logs relacionados
-  - **Log Insights**: consultas SQL-like para analisar logs
-- **Alarmes**: monitoram uma métrica e acionam ações quando ultrapassa um threshold
-  - Estados: OK, ALARM, INSUFFICIENT_DATA
-  - Ações: notificar via SNS, acionar Auto Scaling, executar ação no EC2
-- **Dashboards**: painéis de visualização customizáveis com gráficos de métricas
-- **EventBridge (CloudWatch Events)**: acionar ações baseadas em eventos ou agendamento
-- **Retenção de métricas**: 15 meses para métricas padrão
+- **Metrics**: numerical data collected over time (CPU, NetworkIn, RequestCount, etc.)
+  - Default EC2 metrics: CPU, network, disk — every 5 minutes
+  - **Detailed Monitoring**: metrics every 1 minute (additional cost)
+  - **Custom Metrics**: your own metrics (e.g., active users, queue size)
+- **Logs**: CloudWatch Logs centralizes logs from applications, Lambda, RDS, VPC Flow Logs, etc.
+  - **Log Groups**: containers for related logs
+  - **Log Insights**: SQL-like queries to analyze logs
+- **Alarms**: monitor a metric and trigger actions when it exceeds a threshold
+  - States: OK, ALARM, INSUFFICIENT_DATA
+  - Actions: notify via SNS, trigger Auto Scaling, execute EC2 action
+- **Dashboards**: customizable visualization panels with metric graphs
+- **EventBridge (CloudWatch Events)**: trigger actions based on events or schedules
+- **Metric retention**: 15 months for standard metrics
 
-## Exemplo prático
+## Practical example
 
-**Cenário:** Um time de DevOps configura o CloudWatch para monitorar sua aplicação em produção: um alarme dispara quando a CPU de qualquer instância EC2 ultrapassa 80% por 5 minutos — o SNS envia uma notificação por e-mail e aciona o Auto Scaling para adicionar instâncias. Os logs do Nginx são enviados para o CloudWatch Logs e o Log Insights é usado para consultar erros 500 em tempo real. Um dashboard mostra as principais métricas da aplicação em um único painel.
+**Scenario:** A DevOps team configures CloudWatch to monitor their production application: an alarm fires when CPU on any EC2 instance exceeds 80% for 5 minutes — SNS sends an email notification and triggers Auto Scaling to add instances. Nginx logs are sent to CloudWatch Logs and Log Insights is used to query 500 errors in real time. A dashboard shows key application metrics on a single panel.
