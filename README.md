@@ -18,7 +18,7 @@ Prepare for the **AWS Solutions Architect Associate** certification while buildi
 | 03  | Storage      | S3, EBS, EFS, Glacier                 | ⏳ Planned     |
 | 04  | Networking   | VPC, Subnets, Route53, CloudFront     | ⏳ Planned     |
 | 05  | Databases    | RDS, DynamoDB, Aurora, ElastiCache    | ⏳ Planned     |
-| 06  | Messaging    | SQS, SNS, EventBridge                 | ⏳ Planned     |
+| 06  | Messaging    | SQS, SNS, EventBridge, Kinesis        | ⏳ Planned     |
 | 07  | Monitoring   | CloudWatch, X-Ray, CloudTrail         | ⏳ Planned     |
 | 08  | Security     | KMS, Secrets Manager, WAF, Shield     | ⏳ Planned     |
 | 09  | DevOps       | CodePipeline, CodeBuild, ECR          | ⏳ Planned     |
@@ -31,6 +31,7 @@ Prepare for the **AWS Solutions Architect Associate** certification while buildi
 | [Lab 01](./labs/lab-01-static-site-s3)  | Host a static website on S3 + CloudFront  |
 | [Lab 02](./labs/lab-02-rest-api-lambda) | REST API with API Gateway + Lambda        |
 | [Lab 03](./labs/lab-03-rds-vpc)         | RDS inside a private VPC with EC2 access  |
+| [Lab 04](./labs/lab-04-event-driven-pipeline) | Event-driven pipeline: SQS + EventBridge + Kinesis + Lambda |
 
 ## 📌 Key References
 
